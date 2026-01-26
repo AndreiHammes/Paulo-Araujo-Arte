@@ -97,9 +97,7 @@ paulodearaujo.arte@gmail.com <div className="w-12 h-12 bg-muted rounded-full fl
                   <a href="https://www.instagram.com/atelierpaulodearaujo/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
                     <Instagram size={20} />
                   </a>
-                  <a href="https://facebook.com/paulodearaujo" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
-                    <Facebook size={20} />
-                  </a>
+                  
                 </div>
               </div>
             </div>
