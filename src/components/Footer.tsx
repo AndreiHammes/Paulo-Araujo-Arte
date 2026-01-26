@@ -53,7 +53,7 @@ const Footer = () => {
                 <MapPin size={16} />
                 Porto Alegre, RS - Brasil
               </p>
-              <a href="https://instagram.com/paulodearaujo" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm">@atelierpaulodearaujo<Instagram size={16} />
+              <a target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm" href="https://www.instagram.com/atelierpaulodearaujo/">@atelierpaulodearaujo<Instagram size={16} />
                 @paulodearaujo
               </a>
             </div>
@@ -61,7 +61,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-warm-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-warm-white/10 md:flex-row justify-between items-center gap-4 flex flex-row">
           <p className="text-warm-white/50 text-xs tracking-wide">
             © {currentYear} Paulo de Araújo. Todos os direitos reservados.
           </p>
