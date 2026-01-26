@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Mail, Phone, MapPin } from 'lucide-react';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-charcoal text-warm-white">
+  return <footer className="bg-charcoal text-warm-white">
       <div className="container mx-auto px-6 lg:px-12 py-16">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Brand */}
@@ -46,33 +43,17 @@ const Footer = () => {
               Contato
             </h4>
             <div className="flex flex-col gap-4">
-              <a
-                href="mailto:contato@paulodearaujo.art.br"
-                className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm"
-              >
-                <Mail size={16} />
+              <a href="mailto:contato@paulodearaujo.art.br" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm">paulodearaujo.arte@gmail.com <Mail size={16} />
                 contato@paulodearaujo.art.br
               </a>
-              <a
-                href="https://wa.me/5551999999999"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm"
-              >
-                <Phone size={16} />
+              <a href="https://wa.me/5551999999999" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm">+55 51 98484-6665<Phone size={16} />
                 +55 51 99999-9999
               </a>
               <p className="flex items-center gap-3 text-warm-white/70 text-sm">
                 <MapPin size={16} />
                 Porto Alegre, RS - Brasil
               </p>
-              <a
-                href="https://instagram.com/paulodearaujo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm"
-              >
-                <Instagram size={16} />
+              <a href="https://instagram.com/paulodearaujo" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm">@atelierpaulodearaujo<Instagram size={16} />
                 @paulodearaujo
               </a>
             </div>
@@ -89,8 +70,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
