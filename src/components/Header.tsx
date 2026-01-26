@@ -39,7 +39,7 @@ const Header = () => {
             <img 
               src={assinatura} 
               alt="Paulo de Araújo - Assinatura" 
-              className="h-10 md:h-12 w-auto"
+              className="h-14 md:h-16 w-auto"
             />
           </Link>
 
