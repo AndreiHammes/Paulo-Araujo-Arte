@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import assinatura from '@/assets/assinatura.png';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,9 +36,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo / Signature */}
           <Link to="/" className="flex items-center">
-            <span className="text-2xl md:text-3xl font-light tracking-wide text-primary italic">
-              P. de Araújo
-            </span>
+            <img 
+              src={assinatura} 
+              alt="Paulo de Araújo - Assinatura" 
+              className="h-10 md:h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
