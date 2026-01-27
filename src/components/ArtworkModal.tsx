@@ -17,7 +17,7 @@ const ArtworkModal = ({ artwork, currency, onClose }: ArtworkModalProps) => {
   const whatsappMessage = encodeURIComponent(
     `Olá! Tenho interesse na obra "${artwork.title}" (${artwork.year}). Gostaria de mais informações.`
   );
-  const whatsappLink = `https://wa.me/5551999999999?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/5551984846665?text=${whatsappMessage}`;
 
   return (
     <div

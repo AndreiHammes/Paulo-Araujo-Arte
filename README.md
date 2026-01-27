@@ -1,73 +1,36 @@
-# Welcome to your Lovable project
+# Portfólio Paulo de Araújo
 
-## Project info
+Site institucional para apresentar o trabalho e a trajetória do artista Paulo de Araújo. O projeto une biografia, galeria filtrável de gravuras e desenhos, informações de contato e um seletor de idioma PT/EN, entregando uma experiência visual consistente com a identidade do artista.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Principais recursos
 
-## How can I edit this code?
+- Layout responsivo inspirado no material original do artista
+- Galeria com filtros por tipo de obra e zoom para desenhos
+- Modal com detalhes, preços em múltiplas moedas e CTA para WhatsApp
+- Conteúdo totalmente traduzível (português e inglês) com persistência de preferência
+- Páginas institucionais (Sobre, Contato) alinhadas à marca e acessibilidade
 
-There are several ways of editing your application.
+## Tecnologias utilizadas
 
-**Use Lovable**
+- **React 18 + TypeScript** para componentes e tipagem
+- **Vite** como bundler e ferramenta de desenvolvimento rápida
+- **Tailwind CSS** combinado com CSS autoral para o design system
+- **shadcn/ui + Radix UI** para componentes acessíveis
+- **TanStack Query** para futura integração com dados dinâmicos
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Como executar localmente
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+git clone <url-do-repositorio>
+cd Paulo-Araujo-Arte
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Scripts disponíveis
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- `npm run dev` — inicia o servidor de desenvolvimento Vite
+- `npm run build` — gera o bundle de produção em `dist/`
+- `npm run preview` — serve o build localmente para conferência
+- `npm run lint` — executa a análise estática via ESLint
+- `npm run test` — roda a suíte de testes com Vitest

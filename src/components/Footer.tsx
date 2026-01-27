@@ -1,75 +1,73 @@
-import { Link } from 'react-router-dom';
-import { Instagram, Mail, Phone, MapPin } from 'lucide-react';
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  return <footer className="bg-charcoal text-warm-white">
-      <div className="container mx-auto px-6 lg:px-12 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div>
-            <Link to="/" className="text-2xl font-light tracking-wide italic text-primary">
-              P. de Araújo
-            </Link>
-            <p className="mt-4 text-warm-white/70 text-sm leading-relaxed">
-              Arte que conecta tradição e inovação, explorando a essência da natureza interior 
-              através de formas geométricas e símbolos universais.
-            </p>
-          </div>
+import { Link } from "react-router-dom";
+import { Instagram, Mail, MapPin, Phone } from "lucide-react";
+import Signature from "@/assets/assinatura.png";
+import { useLanguage } from "@/context/LanguageContext";
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-sm tracking-widest uppercase mb-6 text-warm-white/90">
-              Navegação
-            </h4>
-            <nav className="flex flex-col gap-3">
-              <Link to="/" className="text-warm-white/70 hover:text-primary transition-colors text-sm">
-                Início
-              </Link>
-              <Link to="/sobre" className="text-warm-white/70 hover:text-primary transition-colors text-sm">
-                Sobre o Artista
-              </Link>
-              <Link to="/gravuras" className="text-warm-white/70 hover:text-primary transition-colors text-sm">
-                Gravuras
-              </Link>
-              <Link to="/contato" className="text-warm-white/70 hover:text-primary transition-colors text-sm">
-                Contato
-              </Link>
-            </nav>
-          </div>
+const navLinks: { href: string; labelKey: string }[] = [
+  { href: "/", labelKey: "navigation.home" },
+  { href: "/sobre", labelKey: "navigation.about" },
+  { href: "/gravuras", labelKey: "navigation.gallery" },
+  { href: "/contato", labelKey: "navigation.contact" },
+];
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-sm tracking-widest uppercase mb-6 text-warm-white/90">
-              Contato
-            </h4>
-            <div className="flex flex-col gap-4">
-              <a href="mailto:contato@paulodearaujo.art.br" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm">paulodearaujo.arte@gmail.com <Mail size={16} />
-                contato@paulodearaujo.art.br
-              </a>
-              <a href="https://wa.me/5551999999999" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm">+55 51 98484-6665<Phone size={16} />
-                +55 51 99999-9999
-              </a>
-              <p className="flex items-center gap-3 text-warm-white/70 text-sm">
-                <MapPin size={16} />
-                Porto Alegre, RS - Brasil
-              </p>
-              <a target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-white/70 hover:text-primary transition-colors text-sm" href="https://www.instagram.com/atelierpaulodearaujo/">@atelierpaulodearaujo<Instagram size={16} />
-                @paulodearaujo
-              </a>
-            </div>
+export function Footer() {
+  const { t } = useLanguage();
+  const currentYear = new Date().getFullYear().toString();
+
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-column footer-brand">
+          <Link to="/">
+            <img src={Signature} alt={t("about.signatureAlt")}
+            />
+          </Link>
+          <p>{t("footer.description")}</p>
+        </div>
+
+        <div className="footer-column">
+          <h4 className="footer-title">{t("footer.navigationTitle")}</h4>
+          <div className="footer-navigation">
+            {navLinks.map((link) => (
+              <Link key={link.href} to={link.href}>
+                {t(link.labelKey)}
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-warm-white/10 md:flex-row justify-between items-center gap-4 flex flex-row">
-          <p className="text-warm-white/50 text-xs tracking-wide">
-            © {currentYear} Paulo de Araújo. Todos os direitos reservados.
-          </p>
-          <p className="text-warm-white/50 text-xs tracking-wide">
-            Arte Brasileira Contemporânea
-          </p>
+        <div className="footer-column">
+          <h4 className="footer-title">{t("footer.contactTitle")}</h4>
+          <a className="footer-contact-item" href="mailto:paulodearaujo.arte@gmail.com">
+            <Mail aria-hidden="true" />
+            <span>{t("contact.emailValue")}</span>
+          </a>
+          <a className="footer-contact-item" href="tel:+5551984846665">
+            <Phone aria-hidden="true" />
+            <span>{t("contact.phoneValue")}</span>
+          </a>
+          <a
+            className="footer-contact-item"
+            href="https://www.instagram.com/atelierpaulodearaujo/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Instagram aria-hidden="true" />
+            <span>@atelierpaulodearaujo</span>
+          </a>
+          <div className="footer-contact-item" aria-label={t("contact.mapCity")}>
+            <MapPin aria-hidden="true" />
+            <span>{t("contact.mapCity")}</span>
+          </div>
         </div>
       </div>
-    </footer>;
-};
+
+      <div className="footer-bottom">
+        <span>{t("footer.rights").replace("{year}", currentYear)}</span>
+        <span>{t("footer.tagline")}</span>
+      </div>
+    </footer>
+  );
+}
+
 export default Footer;

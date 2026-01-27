@@ -12,11 +12,36 @@ dist
 dist-ssr
 *.local
 
+bun.lockb
+.turbo
+.cache
+.parcel-cache
+.eslintcache
+coverage
+tmp
+temp
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.env.local
+.env.production
+.env.development
+.npmrc
+
+# Deployment artifacts
+.vercel
+.netlify
+
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj

@@ -1,72 +1,116 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import { Mail, Phone, MapPin, Instagram, Facebook, Send, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Send, MessageCircle } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
+
 const Contact = () => {
+  const { t, tObject } = useLanguage();
+  const formTexts = tObject<{
+    title: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    subjectLabel: string;
+    subjectPlaceholder: string;
+    subjectOptions: { value: string; label: string }[];
+    messageLabel: string;
+    messagePlaceholder: string;
+    submit: string;
+    success: string;
+  }>('contact.form');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Visual form only - no backend
-    alert('Obrigado pelo contato! Em breve retornaremos.');
+    alert(formTexts.success);
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
-  return <Layout>
+
+  const subjectOptions = formTexts.subjectOptions ?? [];
+
+  return (
+    <Layout>
       {/* Header */}
-      <section className="py-12 lg:py-16 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-12">
-          <h1 className="section-title text-center mb-4">Contato</h1>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto">
-            Entre em contato para informações sobre obras, exposições, 
-            encomendas ou parcerias artísticas.
-          </p>
-        </div>
+      <section style={{ padding: '40px 25px', backgroundColor: 'white', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '36px', fontWeight: '300', marginBottom: '15px', textTransform: 'uppercase' }}>
+          {t('contact.title')}
+        </h1>
+        <p style={{ fontSize: '18px', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
+          {t('contact.intro')}
+        </p>
       </section>
 
       {/* Content */}
-      <section className="py-12 lg:py-20">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+      <section style={{ padding: '60px 25px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+              gap: '60px',
+            }}
+          >
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-light tracking-wider mb-8">Fale comigo</h2>
+              <h2 style={{ fontSize: '28px', fontWeight: '300', marginBottom: '30px', textTransform: 'uppercase' }}>
+                {t('contact.talkToMe')}
+              </h2>
 
               {/* WhatsApp CTA */}
-              <a href="https://wa.me/5551999999999" target="_blank" rel="noopener noreferrer" className="whatsapp-btn text-lg mb-10 inline-flex">
+              <a
+                href="https://wa.me/5551984846665"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whatsapp-btn text-lg mb-10 inline-flex"
+              >
                 <MessageCircle size={24} />
-                Conversar no WhatsApp
+                {t('contact.whatsappCta')}
               </a>
 
               <div className="space-y-6 mb-10">
-                <a href="mailto:contato@paulodearaujo.art.br" className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group">EMAIL
-paulodearaujo.arte@gmail.com <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <a
+                  href={`mailto:${t('contact.emailValue')}`}
+                  className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
+                >
+                  <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <Mail size={20} className="text-primary" />
                   </div>
                   <div>
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
-                      Email
+                      {t('contact.emailLabel')}
                     </span>
-                    <span>contato@paulodearaujo.art.br</span>
+                    <span>{t('contact.emailValue')}</span>
                   </div>
                 </a>
 
-                <a href="tel:+5551999999999" className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group">
+                <a
+                  href="tel:+5551984846665"
+                  className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
+                >
                   <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <Phone size={20} className="text-primary" />
                   </div>
                   <div>
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
-                      Telefone
+                      {t('contact.phoneLabel')}
                     </span>
-                    <span>+55 51 98484-6665</span>
+                    <span>{t('contact.phoneValue')}</span>
                   </div>
                 </a>
 
@@ -76,13 +120,10 @@ paulodearaujo.arte@gmail.com <div className="w-12 h-12 bg-muted rounded-full fl
                   </div>
                   <div>
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
-                      Atelier
+                      {t('contact.studioLabel')}
                     </span>
-                    <span className="text-foreground">Porto Alegre, RS - Brasil
-
-                    <br />
-                      Cidade Baixa - Porto Alegre, RS<br />
-                      CEP 90050-000
+                    <span className="text-foreground whitespace-pre-line">
+                      {t('contact.studioAddress')}
                     </span>
                   </div>
                 </div>
@@ -91,60 +132,113 @@ paulodearaujo.arte@gmail.com <div className="w-12 h-12 bg-muted rounded-full fl
               {/* Social Links */}
               <div>
                 <h3 className="text-xs tracking-widest uppercase text-muted-foreground mb-4">
-                  Redes Sociais
+                  {t('contact.socialTitle')}
                 </h3>
                 <div className="flex gap-4">
-                  <a href="https://www.instagram.com/atelierpaulodearaujo/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+                  <a
+                    href="https://www.instagram.com/atelierpaulodearaujo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                  >
                     <Instagram size={20} />
                   </a>
-                  
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
             <div className="bg-card border border-border p-6 lg:p-8 rounded-sm">
-              <h2 className="text-2xl font-light tracking-wider mb-6">Envie uma Mensagem</h2>
-              
+              <h2 className="text-2xl font-light tracking-wider mb-6">{formTexts.title}</h2>
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                    Nome
+                  <label
+                    htmlFor="name"
+                    className="block text-xs tracking-widest uppercase text-muted-foreground mb-2"
+                  >
+                    {formTexts.nameLabel}
                   </label>
-                  <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors" placeholder="Seu nome completo" />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                    placeholder={formTexts.namePlaceholder}
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                    Email
+                  <label
+                    htmlFor="email"
+                    className="block text-xs tracking-widest uppercase text-muted-foreground mb-2"
+                  >
+                    {formTexts.emailLabel}
                   </label>
-                  <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors" placeholder="seu@email.com" />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                    placeholder={formTexts.emailPlaceholder}
+                  />
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                    Assunto
+                  <label
+                    htmlFor="subject"
+                    className="block text-xs tracking-widest uppercase text-muted-foreground mb-2"
+                  >
+                    {formTexts.subjectLabel}
                   </label>
-                  <select id="subject" name="subject" value={formData.subject} onChange={handleChange} required className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors">
-                    <option value="">Selecione um assunto</option>
-                    <option value="purchase">Interesse em obra</option>
-                    <option value="commission">Encomenda personalizada</option>
-                    <option value="exhibition">Exposição / Parceria</option>
-                    <option value="press">Imprensa</option>
-                    <option value="other">Outro</option>
+                  <select
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                  >
+                    <option value="">{formTexts.subjectPlaceholder}</option>
+                    {subjectOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-xs tracking-widest uppercase text-muted-foreground mb-2">
-                    Mensagem
+                  <label
+                    htmlFor="message"
+                    className="block text-xs tracking-widest uppercase text-muted-foreground mb-2"
+                  >
+                    {formTexts.messageLabel}
                   </label>
-                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows={5} className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors resize-none" placeholder="Escreva sua mensagem..." />
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 bg-background border border-input rounded-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors resize-none"
+                    placeholder={formTexts.messagePlaceholder}
+                  />
                 </div>
 
-                <button type="submit" className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground tracking-widest uppercase text-sm font-medium hover:bg-primary/90 transition-colors">
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground tracking-widest uppercase text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
                   <Send size={18} />
-                  Enviar Mensagem
+                  {formTexts.submit}
                 </button>
               </form>
             </div>
@@ -157,13 +251,12 @@ paulodearaujo.arte@gmail.com <div className="w-12 h-12 bg-muted rounded-full fl
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <MapPin size={48} className="text-primary mx-auto mb-4" />
-            <p className="text-muted-foreground">
-              Porto Alegre, RS - Brasil<br />
-              <span className="text-sm"></span>
-            </p>
+            <p className="text-muted-foreground">{t('contact.mapCity')}</p>
           </div>
         </div>
       </section>
-    </Layout>;
+    </Layout>
+  );
 };
+
 export default Contact;
