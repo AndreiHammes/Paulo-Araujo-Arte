@@ -44,7 +44,7 @@
     --radius: 0.25rem;
 
     /* Custom tokens */
-    --header-height: 80px;
+    --header-height: 84px;
     --gallery-gap: 1.5rem;
     
     /* Artistic colors */
@@ -113,10 +113,11 @@
     background-color: white;
     display: flex;
     justify-content: space-between;
-    padding: 0px 25px;
+    padding: 8px 32px;
     align-items: center;
     border-bottom: 1px solid black;
     position: relative;
+    min-height: var(--header-height);
   }
 
   .menu a {
@@ -142,10 +143,11 @@
   }
 
   .header img {
-    width: 200px;
+    width: 260px;
     height: auto;
     position: relative;
-    right: -70px;
+    right: -40px;
+    margin: 8px 0;
   }
 
   .menu {
@@ -192,7 +194,7 @@
   .hero-section {
     display: flex;
     width: 100%;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - var(--header-height));
   }
 
   .hero-image {
@@ -285,6 +287,18 @@
   
   .artwork-card:hover img {
     @apply scale-105;
+  }
+
+  .drawing-card {
+    @apply rounded-sm border border-border bg-white;
+  }
+
+  .drawing-card img {
+    @apply object-contain w-full h-full bg-white p-6;
+  }
+
+  .drawing-card:hover img {
+    transform: none;
   }
 
   .section-title {

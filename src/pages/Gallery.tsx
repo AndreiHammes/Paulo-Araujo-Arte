@@ -164,14 +164,13 @@ const Gallery = () => {
               ? drawingSeries.map((drawing, index) => (
                   <div
                     key={drawing.id}
-                    className="artwork-card aspect-square group"
+                    className="artwork-card drawing-card group"
                     onClick={() => setSelectedDrawing(drawing)}
-                    style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
+                    style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer', aspectRatio: '3 / 4' }}
                   >
                     <img
                       src={drawing.image}
                       alt={`${drawingTitlePrefix} ${String(drawing.number).padStart(2, '0')}`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-x-0 bottom-0 p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-charcoal/80 to-transparent">
                       <h3 className="text-warm-white text-lg font-medium">
@@ -230,7 +229,7 @@ const Gallery = () => {
             <img
               src={selectedDrawing.image}
               alt={`${drawingTitlePrefix} ${String(selectedDrawing.number).padStart(2, '0')}`}
-              className="w-full h-full object-contain rounded-sm"
+              className="mx-auto max-h-[80vh] w-auto max-w-full object-contain rounded-sm"
             />
             <button
               onClick={() => setSelectedDrawing(null)}

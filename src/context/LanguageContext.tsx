@@ -11,7 +11,7 @@ const translations: Translations = {
     navigation: {
       home: 'Início',
       about: 'Sobre o Artista',
-      gallery: 'Gravuras',
+      gallery: 'Obras',
       contact: 'Contato',
     },
     languageToggle: {
@@ -29,12 +29,12 @@ const translations: Translations = {
       },
     },
     gallery: {
-      title: 'Gravuras',
+      title: 'Obras',
       intro: 'Explore a coleção de obras originais, reproduções autorizadas e a série de desenhos do artista.',
       filters: {
         original: 'Originais',
         copy: 'Cópias',
-        drawings: 'Série Desenhos',
+        drawings: 'Desenhos',
       },
       currencyLabel: 'Moeda:',
       empty: 'Nenhuma obra encontrada com os filtros selecionados.',
@@ -42,7 +42,7 @@ const translations: Translations = {
     artworkModal: {
       closeAria: 'Fechar',
       originalBadge: 'Original',
-      dimensions: 'Dimensões',
+      dimensions: 'Dimensões disponíveis',
       technique: 'Técnica',
       values: 'Valores',
       original: 'Original',
@@ -56,25 +56,7 @@ const translations: Translations = {
         'Paulo de Araújo é um artista plástico brasileiro cuja obra transcende fronteiras culturais e temporais. Natural de Porto Alegre, desenvolveu desde jovem uma fascinação pelas narrativas visuais dos povos tradicionais.',
         'Seu trabalho é uma síntese única de influências africanas, indígenas brasileiras e europeias, tecidas através de técnicas ancestrais e contemporâneas. Cada gravura é um portal para mundos onde o sagrado e o cotidiano se encontram.'
       ],
-      signatureAlt: 'Assinatura de Paulo de Araújo',
-      statement: {
-        title: 'Declaração Artística',
-        quote: '"Minha arte é uma ponte entre mundos – o visível e o invisível, o ancestral e o contemporâneo, o individual e o coletivo. Cada traço carrega a memória de povos que vieram antes de nós e a esperança daqueles que virão depois. Busco, através das formas e cores, despertar no espectador a consciência de que todos somos parte de uma mesma trama cósmica."',
-        author: '— Paulo de Araújo',
-      },
-      timeline: {
-        title: 'Trajetória',
-        items: [
-          { year: '1965', text: 'Nasce em Porto Alegre, Rio Grande do Sul' },
-          { year: '1985', text: 'Inicia estudos em Artes Visuais na UFRGS' },
-          { year: '1990', text: 'Primeira exposição individual na Galeria Iberê Camargo' },
-          { year: '1998', text: 'Viagem de estudos para a África Ocidental' },
-          { year: '2005', text: 'Exposição coletiva no MASP - São Paulo' },
-          { year: '2012', text: 'Residência artística em Berlim, Alemanha' },
-          { year: '2018', text: 'Retrospectiva "30 Anos de Criação" no MARGS' },
-          { year: '2024', text: 'Nova série "Constelações Interiores"' },
-        ],
-      },
+      signatureAlt: 'Logo do Atelier Paulo de Araújo',
       influences: {
         title: 'Influências',
         items: [
@@ -134,7 +116,7 @@ const translations: Translations = {
     navigation: {
       home: 'Home',
       about: 'About the Artist',
-      gallery: 'Prints',
+      gallery: 'Works',
       contact: 'Contact',
     },
     languageToggle: {
@@ -152,12 +134,12 @@ const translations: Translations = {
       },
     },
     gallery: {
-      title: 'Prints',
-      intro: 'Explore the collection of original works, authorized reproductions, and the artist’s drawing series.',
+      title: 'Works',
+      intro: 'Explore the collection of original works, authorized reproductions, and drawings by the artist.',
       filters: {
         original: 'Originals',
         copy: 'Copies',
-        drawings: 'Drawing Series',
+        drawings: 'Drawings',
       },
       currencyLabel: 'Currency:',
       empty: 'No artworks found for the selected filters.',
@@ -165,7 +147,7 @@ const translations: Translations = {
     artworkModal: {
       closeAria: 'Close',
       originalBadge: 'Original',
-      dimensions: 'Dimensions',
+      dimensions: 'Available dimensions',
       technique: 'Technique',
       values: 'Pricing',
       original: 'Original',
@@ -179,25 +161,7 @@ const translations: Translations = {
         'Paulo de Araújo is a Brazilian visual artist whose work transcends cultural and temporal boundaries. Born in Porto Alegre, he developed from an early age a fascination with the visual narratives of traditional peoples.',
         'His practice is a unique synthesis of African, Indigenous Brazilian, and European influences, woven through ancestral and contemporary techniques. Each print is a portal to worlds where the sacred and the everyday meet.'
       ],
-      signatureAlt: 'Signature of Paulo de Araújo',
-      statement: {
-        title: 'Artist Statement',
-        quote: '"My art is a bridge between worlds—the visible and the invisible, the ancestral and the contemporary, the individual and the collective. Every line carries the memory of those who came before us and the hope of those who will come after. Through forms and colors, I seek to awaken in the viewer the awareness that we are all part of the same cosmic tapestry."',
-        author: '— Paulo de Araújo',
-      },
-      timeline: {
-        title: 'Trajectory',
-        items: [
-          { year: '1965', text: 'Born in Porto Alegre, Rio Grande do Sul' },
-          { year: '1985', text: 'Begins Visual Arts studies at UFRGS' },
-          { year: '1990', text: 'First solo exhibition at Galeria Iberê Camargo' },
-          { year: '1998', text: 'Study trip across West Africa' },
-          { year: '2005', text: 'Group exhibition at MASP - São Paulo' },
-          { year: '2012', text: 'Artist residency in Berlin, Germany' },
-          { year: '2018', text: 'Retrospective “30 Years of Creation” at MARGS' },
-          { year: '2024', text: 'New series “Inner Constellations”' },
-        ],
-      },
+      signatureAlt: 'Paulo de Araújo Atelier Logo',
       influences: {
         title: 'Influences',
         items: [

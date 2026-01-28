@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import assinatura from '@/assets/assinatura.png';
+import logoAtelier from '@/assets/novo logo atelier.png';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="header">
       <Link to="/">
-        <img src={assinatura} alt={t('about.signatureAlt')} />
+        <img src={logoAtelier} alt={t('about.signatureAlt')} />
       </Link>
       <div className="header-actions">
         <nav>
