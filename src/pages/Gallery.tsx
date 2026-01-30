@@ -13,7 +13,7 @@ interface DrawingItem {
   number: number;
 }
 
-const drawingImports = import.meta.glob<string>('@/assets/desenho*.{png,jpg,jpeg}', {
+const drawingImports = import.meta.glob<string>('../assets/desenho*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
 });
@@ -64,91 +64,46 @@ const Gallery = () => {
   return (
     <Layout>
       {/* Header */}
-      <section style={{ padding: '40px 25px', backgroundColor: 'white', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '36px', fontWeight: '300', marginBottom: '15px', textTransform: 'uppercase' }}>{t('gallery.title')}</h1>
-        <p style={{ fontSize: '18px', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
-          {t('gallery.intro')}
-        </p>
+      <section className="gallery-header">
+        <h1 className="gallery-title">{t('gallery.title')}</h1>
+        <p className="gallery-intro">{t('gallery.intro')}</p>
       </section>
 
       {/* Filters */}
-      <section style={{ padding: '20px 25px', borderBottom: '1px solid #ddd', backgroundColor: 'white' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1400px', margin: '0 auto' }}>
-          {/* Filter Buttons */}
-          <div style={{ display: 'flex', gap: '30px' }}>
+      <section className="gallery-controls">
+        <div className="gallery-controls-inner">
+          <div className="gallery-filter-buttons">
             <button
               onClick={() => setFilter('original')}
-              style={{
-                fontSize: '16px',
-                textTransform: 'uppercase',
-                padding: '8px 0',
-                background: 'none',
-                border: 'none',
-                borderBottom: filter === 'original' ? '2px solid black' : '2px solid transparent',
-                cursor: 'pointer',
-                fontWeight: filter === 'original' ? '600' : '400'
-              }}
+              className={`gallery-filter-button ${filter === 'original' ? 'is-active' : ''}`}
             >
               {filters.original}
             </button>
             <button
               onClick={() => setFilter('copy')}
-              style={{
-                fontSize: '16px',
-                textTransform: 'uppercase',
-                padding: '8px 0',
-                background: 'none',
-                border: 'none',
-                borderBottom: filter === 'copy' ? '2px solid black' : '2px solid transparent',
-                cursor: 'pointer',
-                fontWeight: filter === 'copy' ? '600' : '400'
-              }}
+              className={`gallery-filter-button ${filter === 'copy' ? 'is-active' : ''}`}
             >
               {filters.copy}
             </button>
             <button
               onClick={() => setFilter('drawing')}
-              style={{
-                fontSize: '16px',
-                textTransform: 'uppercase',
-                padding: '8px 0',
-                background: 'none',
-                border: 'none',
-                borderBottom: filter === 'drawing' ? '2px solid black' : '2px solid transparent',
-                cursor: 'pointer',
-                fontWeight: filter === 'drawing' ? '600' : '400'
-              }}
+              className={`gallery-filter-button ${filter === 'drawing' ? 'is-active' : ''}`}
             >
               {filters.drawings}
             </button>
           </div>
 
-          {/* Currency Toggle */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '14px' }}>{t('gallery.currencyLabel')}</span>
+          <div className="gallery-currency">
+            <span>{t('gallery.currencyLabel')}</span>
             <button
               onClick={() => setCurrency('brl')}
-              style={{
-                padding: '6px 15px',
-                border: '1px solid black',
-                background: currency === 'brl' ? 'black' : 'white',
-                color: currency === 'brl' ? 'white' : 'black',
-                cursor: 'pointer',
-                fontSize: '14px'
-              }}
+              className={`gallery-currency-button ${currency === 'brl' ? 'is-active' : ''}`}
             >
               R$
             </button>
             <button
               onClick={() => setCurrency('usd')}
-              style={{
-                padding: '6px 15px',
-                border: '1px solid black',
-                background: currency === 'usd' ? 'black' : 'white',
-                color: currency === 'usd' ? 'white' : 'black',
-                cursor: 'pointer',
-                fontSize: '14px'
-              }}
+              className={`gallery-currency-button ${currency === 'usd' ? 'is-active' : ''}`}
             >
               US$
             </button>
@@ -157,9 +112,9 @@ const Gallery = () => {
       </section>
 
       {/* Gallery Grid */}
-      <section style={{ padding: '40px 25px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '36px' }}>
+      <section className="gallery-grid-wrap">
+        <div className="gallery-grid-container">
+          <div className="gallery-grid">
             {isDrawingFilter
               ? drawingSeries.map((drawing, index) => (
                   <div

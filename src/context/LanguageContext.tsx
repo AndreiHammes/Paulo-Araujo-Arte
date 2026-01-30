@@ -10,7 +10,7 @@ const translations: Translations = {
   pt: {
     navigation: {
       home: 'Início',
-      about: 'Sobre o Artista',
+      about: 'O Artista',
       gallery: 'Obras',
       contact: 'Contato',
     },
@@ -23,9 +23,13 @@ const translations: Translations = {
     home: {
       hero: {
         paragraphs: [
-          'Artista natural de Porto Alegre, no sul do Brasil. Suas pinturas criam um diálogo entre símbolos universais e a essência da natureza interior, influenciadas pela cultura africana, pelos povos originários e pela rica tradição da arte brasileira.',
-          'Paulo de Araújo explora formas geométricas e jogos de espaço para revelar a beleza misteriosa e convidativa de suas obras. Cada peça é uma expressão única que conecta o espectador a algo maior e transcendente. Descubra um mundo onde tradição e inovação se encontram.'
+          'Sou artista visual natural de Porto Alegre, no sul do Brasil. Minha pintura estabelece um diálogo entre símbolos universais e dimensões da natureza interior, articulando referências da cultura africana, dos povos originários e da tradição da arte brasileira. Investigo a relação entre forma, geometria e espaço como estruturas simbólicas capazes de revelar uma beleza sutil, enigmática e convidativa. Cada obra é concebida como uma peça única, resultado de um processo atento e sensível, onde matéria, gesto e significado se entrelaçam.',
+          'Proponho a você uma experiência de contemplação e conexão, abrindo caminhos para leituras pessoais e afetivas. Situada no encontro entre tradição e contemporaneidade, minha obra dialoga com o tempo, a memória e o imaginário coletivo. É especialmente adequada para colecionadores, projetos curatoriais e criações sob encomenda.'
         ],
+        moreButton: {
+          show: 'Ver mais',
+          hide: 'Ver menos',
+        },
       },
     },
     gallery: {
@@ -51,7 +55,7 @@ const translations: Translations = {
       whatsappMessage: 'Olá! Tenho interesse na obra "{title}" ({year}). Gostaria de mais informações.',
     },
     about: {
-      title: 'Sobre o Artista',
+      title: 'O Artista',
       paragraphs: [
         'Paulo de Araújo é um artista plástico brasileiro cuja obra transcende fronteiras culturais e temporais. Natural de Porto Alegre, desenvolveu desde jovem uma fascinação pelas narrativas visuais dos povos tradicionais.',
         'Seu trabalho é uma síntese única de influências africanas, indígenas brasileiras e europeias, tecidas através de técnicas ancestrais e contemporâneas. Cada gravura é um portal para mundos onde o sagrado e o cotidiano se encontram.'
@@ -131,6 +135,10 @@ const translations: Translations = {
           'An artist born in Porto Alegre, in southern Brazil. His paintings create a dialogue between universal symbols and the essence of the inner nature, influenced by African culture, Indigenous peoples, and the rich tradition of Brazilian art.',
           'Paulo de Araújo explores geometric forms and spatial play to reveal the mysterious, inviting beauty of his works. Each piece is a unique expression that connects the viewer to something greater and transcendent. Discover a world where tradition and innovation meet.'
         ],
+        moreButton: {
+          show: 'See more',
+          hide: 'See less',
+        },
       },
     },
     gallery: {
@@ -156,7 +164,7 @@ const translations: Translations = {
       whatsappMessage: 'Hello! I am interested in the artwork "{title}" ({year}). Could you send me more information?',
     },
     about: {
-      title: 'About the Artist',
+      title: 'The Artist',
       paragraphs: [
         'Paulo de Araújo is a Brazilian visual artist whose work transcends cultural and temporal boundaries. Born in Porto Alegre, he developed from an early age a fascination with the visual narratives of traditional peoples.',
         'His practice is a unique synthesis of African, Indigenous Brazilian, and European influences, woven through ancestral and contemporary techniques. Each print is a portal to worlds where the sacred and the everyday meet.'

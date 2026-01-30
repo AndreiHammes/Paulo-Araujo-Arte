@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, MapPin, Phone } from "lucide-react";
-import Signature from "@/assets/assinatura.png";
+import LogoAtelier from "@/assets/novo logo atelier.png";
 import { useLanguage } from "@/context/LanguageContext";
-
-const navLinks: { href: string; labelKey: string }[] = [
-  { href: "/", labelKey: "navigation.home" },
-  { href: "/sobre", labelKey: "navigation.about" },
-  { href: "/gravuras", labelKey: "navigation.gallery" },
-  { href: "/contato", labelKey: "navigation.contact" },
-];
 
 export function Footer() {
   const { t } = useLanguage();
@@ -19,24 +12,13 @@ export function Footer() {
       <div className="footer-content">
         <div className="footer-column footer-brand">
           <Link to="/">
-            <img src={Signature} alt={t("about.signatureAlt")}
+            <img src={LogoAtelier} alt={t("about.signatureAlt")}
             />
           </Link>
           <p>{t("footer.description")}</p>
         </div>
 
-        <div className="footer-column">
-          <h4 className="footer-title">{t("footer.navigationTitle")}</h4>
-          <div className="footer-navigation">
-            {navLinks.map((link) => (
-              <Link key={link.href} to={link.href}>
-                {t(link.labelKey)}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="footer-column">
+        <div className="footer-column footer-contact">
           <h4 className="footer-title">{t("footer.contactTitle")}</h4>
           <a className="footer-contact-item" href="mailto:paulodearaujo.arte@gmail.com">
             <Mail aria-hidden="true" />

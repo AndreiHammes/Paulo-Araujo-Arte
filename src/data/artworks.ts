@@ -1,9 +1,11 @@
-import artwork1 from '@/assets/estandarte01.jpg';
-import artwork2 from '@/assets/estandarte02.jpg';
-import artwork3 from '@/assets/estandarte03.jpg';
-import artwork4 from '@/assets/estandarte04.jpg';
-import artwork5 from '@/assets/estandarte 5.jpg';
-import artwork6 from '@/assets/estandarte 6.jpg';
+const asset = (relativePath: string) => new URL(relativePath, import.meta.url).href;
+
+const artwork1 = asset('../assets/estandarte01.jpg');
+const artwork2 = asset('../assets/estandarte02.jpg');
+const artwork3 = asset('../assets/estandarte03.jpg');
+const artwork4 = asset('../assets/estandarte04.jpg');
+const artwork5 = asset('../assets/estandarte 5.jpg');
+const artwork6 = asset('../assets/estandarte 6.jpg');
 
 export interface Artwork {
   id: string;
