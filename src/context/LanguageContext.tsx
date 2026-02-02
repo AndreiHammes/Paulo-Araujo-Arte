@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, R
 
 type Language = 'pt' | 'en';
 
-type TranslationValue = string | string[] | Record<string, TranslationValue>;
+type TranslationValue = string | string[] | Record<string, any>;
 
 type Translations = Record<Language, Record<string, TranslationValue>>;
 
@@ -12,6 +12,7 @@ const translations: Translations = {
       home: 'Início',
       about: 'O Artista',
       gallery: 'Obras',
+      exhibitions: 'Exposições',
       contact: 'Contato',
     },
     languageToggle: {
@@ -23,8 +24,7 @@ const translations: Translations = {
     home: {
       hero: {
         paragraphs: [
-          'Sou artista visual natural de Porto Alegre, no sul do Brasil. Minha pintura estabelece um diálogo entre símbolos universais e dimensões da natureza interior, articulando referências da cultura africana, dos povos originários e da tradição da arte brasileira. Investigo a relação entre forma, geometria e espaço como estruturas simbólicas capazes de revelar uma beleza sutil, enigmática e convidativa. Cada obra é concebida como uma peça única, resultado de um processo atento e sensível, onde matéria, gesto e significado se entrelaçam.',
-          'Proponho a você uma experiência de contemplação e conexão, abrindo caminhos para leituras pessoais e afetivas. Situada no encontro entre tradição e contemporaneidade, minha obra dialoga com o tempo, a memória e o imaginário coletivo. É especialmente adequada para colecionadores, projetos curatoriais e criações sob encomenda.'
+          'Utilizo a força e a energia dos símbolos como instrumento de conexão íntima e universal. Minha pintura propõe um mergulho nas leis esquecidas da natureza interior, utilizando jogos geométricos, contrastes entre simetria e assimetria, curvas, retas, cheios e vazios. Cada obra nasce como um fragmento de um universo reinventado, convidando o espectador a explorar sentidos que vão além da objetividade. Para mim, criar é abrir um portal para uma multi dimensão, onde forma, cor e silêncio se unem numa expressão singular de beleza e mistério'
         ],
         moreButton: {
           show: 'Ver mais',
@@ -36,12 +36,28 @@ const translations: Translations = {
       title: 'Obras',
       intro: 'Explore a coleção de obras originais, reproduções autorizadas e a série de desenhos do artista.',
       filters: {
-        original: 'Originais',
-        copy: 'Cópias',
+        original: 'Estandartes Imaginários',
         drawings: 'Desenhos',
+        zen: 'Série Zen',
       },
       currencyLabel: 'Moeda:',
       empty: 'Nenhuma obra encontrada com os filtros selecionados.',
+    },
+    exhibitions: {
+      title: 'Exposições',
+      intro: 'Uma trajetória marcada por mostras no Brasil e no exterior, conectando diferentes públicos à potência simbólica das obras.',
+      imageAlt: 'Registro de gravura do artista Paulo de Araújo',
+      items: [
+        '1987 - Couromoda São Paulo. Pintura painel "Praça Vermelha de Moscou", medindo 3,50 m x 12,50 m.',
+        '2009 - FENEARTE - Feira Nacional de Arte e Artesanato, Recife/PE.',
+        '2009 - Exposição na Galeria Imaginarium, Olinda/PE.',
+        '2021 - Espaço Terra Verde, exposição coletiva "Organicidades" com curadoria de Anaurelino de Barros Neto.',
+        '2021 - Obras expostas e vendidas em Wellington, Nova Zelândia, pela curadora e colecionadora Getrude Matsche.',
+        '2022 - Centro Cultural de Gramado/RS, exposição coletiva "Organicidades", curadoria de Anaurelino de Barros Neto.',
+        '2022 - Duas obras expostas e vendidas para Wisconsin/EUA para Dianne Marie.',
+        '2024 - Galeria Bublitz - exposição da obra "Estandarte Imaginário". Doação para restauração da entidade Pão dos Pobres de Porto Alegre, coletiva da AHMI.',
+        '2025 - Galeria Habitart - exposição das séries "Estandartes Imaginários", "Zen" e "Tango em Grafite".',
+      ],
     },
     artworkModal: {
       closeAria: 'Fechar',
@@ -55,10 +71,9 @@ const translations: Translations = {
       whatsappMessage: 'Olá! Tenho interesse na obra "{title}" ({year}). Gostaria de mais informações.',
     },
     about: {
-      title: 'O Artista',
+      title: "",
       paragraphs: [
-        'Paulo de Araújo é um artista plástico brasileiro cuja obra transcende fronteiras culturais e temporais. Natural de Porto Alegre, desenvolveu desde jovem uma fascinação pelas narrativas visuais dos povos tradicionais.',
-        'Seu trabalho é uma síntese única de influências africanas, indígenas brasileiras e europeias, tecidas através de técnicas ancestrais e contemporâneas. Cada gravura é um portal para mundos onde o sagrado e o cotidiano se encontram.'
+        'Sou artista visual natural de Porto Alegre, no sul do Brasil. Minha pintura estabelece um diálogo entre símbolos universais e dimensões da natureza interior, articulando referências da cultura africana, dos povos originários e da tradição da arte brasileira. O trabalho investiga a relação entre forma, geometria e espaço como estruturas simbólicas capazes de revelar uma beleza sutil, enigmática e convidativa. Cada obra é concebida como uma peça única, resultado de um processo atento e sensível, onde matéria, gesto e significado se entrelaçam. Proponho ao observador uma experiência de contemplação e conexão, abrindo caminhos para leituras pessoais e afetivas. Situada no encontro entre tradição e contemporaneidade, dialoga com o tempo, a memória e o imaginário coletivo, especialmente adequada para colecionadores, projetos curatoriais e trabalhos por encomenda.'
       ],
       signatureAlt: 'Logo do Atelier Paulo de Araújo',
       influences: {
@@ -121,6 +136,7 @@ const translations: Translations = {
       home: 'Home',
       about: 'About the Artist',
       gallery: 'Works',
+      exhibitions: 'Exhibitions',
       contact: 'Contact',
     },
     languageToggle: {
@@ -145,12 +161,28 @@ const translations: Translations = {
       title: 'Works',
       intro: 'Explore the collection of original works, authorized reproductions, and drawings by the artist.',
       filters: {
-        original: 'Originals',
-        copy: 'Copies',
+        original: 'Imaginary Banners',
         drawings: 'Drawings',
+        zen: 'Zen Series',
       },
       currencyLabel: 'Currency:',
       empty: 'No artworks found for the selected filters.',
+    },
+    exhibitions: {
+      title: 'Exhibitions',
+      intro: 'A journey that spans Brazil and abroad, connecting diverse audiences to the symbolic power of the artworks.',
+      imageAlt: 'Printmaking piece by the artist Paulo de Araújo',
+      items: [
+        '1987 - Couromoda São Paulo. Large-scale mural painting "Red Square of Moscow", measuring 3.50 m x 12.50 m.',
+        '2009 - FENEARTE - National Art and Handicraft Fair, Recife/PE, Brazil.',
+        '2009 - Exhibition at Imaginarium Gallery, Olinda/PE, Brazil.',
+        '2021 - Espaço Terra Verde, group exhibition "Organicidades", curated by Anaurelino de Barros Neto.',
+        '2021 - Works showcased and acquired in Wellington, New Zealand, by curator and collector Getrude Matsche.',
+        '2022 - Centro Cultural de Gramado/RS, group exhibition "Organicidades", curated by Anaurelino de Barros Neto.',
+        '2022 - Two artworks exhibited and acquired in Wisconsin, USA, by Dianne Marie.',
+        '2024 - Galeria Bublitz - exhibition of the piece "Estandarte Imaginário". Donation to support the restoration of the Pão dos Pobres institution in Porto Alegre, collective by AHMI.',
+        '2025 - Galeria Habitart - exhibition of the series "Estandartes Imaginários", "Zen", and "Tango em Grafite".',
+      ],
     },
     artworkModal: {
       closeAria: 'Close',

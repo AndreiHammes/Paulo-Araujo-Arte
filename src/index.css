@@ -103,8 +103,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
-    @apply font-light tracking-wide;
+    font-family: 'Alatsi', 'Raleway', sans-serif;
+    font-weight: 400;
+    letter-spacing: normal;
   }
 }
 
@@ -126,7 +127,7 @@
     font-weight: 700;
     font-family: 'Gotham Book', 'Gotham', 'Raleway', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: normal;
     text-decoration: none;
     color: black;
     display: inline-flex;
@@ -304,8 +305,19 @@
     }
 
     .gallery-grid {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 28px !important;
+    }
+
+    .gallery-item {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .gallery-item img {
+      width: 100% !important;
+      height: auto !important;
     }
   }
 
@@ -320,8 +332,8 @@
     }
 
     .header-brand {
-      font-size: 26px;
-      letter-spacing: 0.1em;
+      font-size: 24px;
+      letter-spacing: normal;
     }
 
     .hamburger-toggle {
@@ -389,16 +401,23 @@
       gap: 20px;
     }
 
+    .gallery-header {
+      display: none;
+    }
+
     .gallery-filter-buttons {
       width: 100%;
       justify-content: space-between;
       gap: 16px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
     }
 
     .gallery-filter-button {
-      flex: 1 1 45%;
+      flex: 1 1 auto;
       text-align: center;
       padding-bottom: 12px;
+      white-space: nowrap;
     }
 
     .gallery-currency {
@@ -408,16 +427,48 @@
     }
 
     .gallery-grid-wrap {
-      padding: 32px 20px;
+      padding: 24px 20px;
     }
 
     .gallery-grid {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
+      display: flex !important;
+      flex-direction: column !important;
+      grid-template-columns: none !important;
+      gap: 32px !important;
+      width: 100% !important;
+    }
+
+    .gallery-item {
+      width: 100% !important;
+      aspect-ratio: auto !important;
+      max-width: 100% !important;
+      min-height: auto !important;
+      flex: 0 0 100% !important;
+    }
+
+    .gallery-item img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+
+    .drawing-card img {
+      object-fit: contain !important;
+      padding: 20px !important;
     }
   }
 
   @media (max-width: 640px) {
+    html {
+      font-size: 15px;
+    }
+
+    body {
+      font-size: 0.95rem;
+    }
+
     .hero-image {
       min-height: 50vh;
     }
@@ -427,13 +478,13 @@
     }
 
     .hero-text p {
-      font-size: 20px;
-      line-height: 1.6;
+      font-size: 18px;
+      line-height: 1.55;
     }
 
     .header-brand {
-      font-size: 24px;
-      letter-spacing: 0.06em;
+      font-size: 20px;
+      letter-spacing: normal;
     }
 
     .hamburger-toggle span {
@@ -449,31 +500,80 @@
     }
 
     .gallery-title {
-      font-size: 26px;
-      letter-spacing: 0.08em;
+      font-size: 24px;
+      letter-spacing: normal;
     }
 
     .gallery-intro {
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .gallery-filter-buttons {
       gap: 12px;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      overflow-x: auto;
     }
 
     .gallery-filter-button {
-      flex: 1 1 100%;
+      flex: 1 1 auto;
+      white-space: nowrap;
+    }
+
+    .gallery-grid-wrap {
+      padding: 20px 20px;
     }
 
     .gallery-grid {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
+      display: flex !important;
+      flex-direction: column !important;
+      grid-template-columns: none !important;
+      gap: 28px !important;
+      width: 100% !important;
+    }
+
+    .gallery-item {
+      width: 100% !important;
+      aspect-ratio: auto !important;
+      max-width: 100% !important;
+      min-height: auto !important;
+      flex: 0 0 100% !important;
+    }
+
+    .gallery-item img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+
+    .drawing-card img {
+      object-fit: contain !important;
+      padding: 16px !important;
     }
 
     .footer-content {
       flex-direction: column;
       gap: 32px;
       align-items: flex-start;
+    }
+
+    .footer-contact-item,
+    .footer-contact-item span {
+      font-size: 13px;
+    }
+
+    .section-title {
+      font-size: 24px;
+    }
+
+    .text-lg {
+      font-size: 1.05rem;
+    }
+
+    .text-base {
+      font-size: 0.95rem;
     }
 
     .footer-column {
@@ -504,6 +604,17 @@
 
   .artwork-card {
     @apply relative overflow-hidden cursor-pointer;
+  }
+
+  .gallery-item {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drawing-card.gallery-item {
+    aspect-ratio: 3 / 4;
   }
 
   .artwork-card::before {
@@ -538,6 +649,7 @@
 
   .section-title {
     @apply text-3xl md:text-4xl font-light tracking-wider text-foreground mb-8;
+    letter-spacing: normal;
   }
 
   .whatsapp-btn {
@@ -564,9 +676,9 @@
 
   .gallery-title {
     font-size: 36px;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 15px;
-    letter-spacing: 0.1em;
+    letter-spacing: normal;
     text-transform: uppercase;
   }
 
@@ -650,7 +762,7 @@
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 36px;
   }
 

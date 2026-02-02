@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/context/LanguageContext';
 
-const perfilImage = new URL('../assets/perfil.png', import.meta.url).href;
+const perfilImage = new URL('../assets/perfil.png?w=800&format=webp;png', import.meta.url).href;
 
 const About = () => {
   const { t, tArray, tObject } = useLanguage();
@@ -26,7 +26,7 @@ const About = () => {
               <img
                 src={perfilImage}
                 alt="Paulo de Araújo"
-                className="w-full aspect-[4/3] object-cover rounded-sm shadow-lg"
+                className="w-full max-w-[32rem] h-auto object-contain rounded-sm shadow-lg mx-auto lg:mx-0"
               />
             </div>
           </div>

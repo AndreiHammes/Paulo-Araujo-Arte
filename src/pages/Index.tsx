@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import estandarteDois from '@/assets/estandarte02.jpg';
+import estandarteDois from '@/assets/estandartes/estandarte02.jpg';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Index = () => {
@@ -15,9 +15,6 @@ const Index = () => {
   return (
     <Layout>
       <div className="hero-section">
-        <div className="hero-image">
-          <img src={estandarteDois} alt="Estandarte 02" />
-        </div>
         <div className="hero-text">
           {visibleParagraphs.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
@@ -31,6 +28,9 @@ const Index = () => {
               {showAll ? t('home.hero.moreButton.hide') : t('home.hero.moreButton.show')}
             </button>
           )}
+        </div>
+        <div className="hero-image">
+          <img src={estandarteDois} alt="Estandarte 02" />
         </div>
       </div>
     </Layout>

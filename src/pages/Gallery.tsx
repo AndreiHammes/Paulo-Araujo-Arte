@@ -5,7 +5,7 @@ import ArtworkModal from '@/components/ArtworkModal';
 import { artworks, Artwork } from '@/data/artworks';
 import { useLanguage } from '@/context/LanguageContext';
 
-type FilterType = 'original' | 'copy' | 'drawing';
+type FilterType = 'original' | 'drawing' | 'zen';
 
 interface DrawingItem {
   id: string;
@@ -13,18 +13,50 @@ interface DrawingItem {
   number: number;
 }
 
-const drawingImports = import.meta.glob<string>('../assets/desenho*.{png,jpg,jpeg}', {
+const drawingImports = import.meta.glob<string>('../assets/desenhos/*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
 });
 
-const drawingSeries: DrawingItem[] = Object.entries(drawingImports)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([_, image], index) => ({
-    id: `drawing-${index + 1}`,
-    image,
-    number: index + 1,
-  }));
+const zenImports = import.meta.glob<string>('../assets/zen/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+});
+
+const allDrawings: DrawingItem[] = Object.entries(drawingImports)
+  .map(([path, image]) => {
+    const match = path.match(/desenho(\d+)/i);
+    const number = match ? Number(match[1]) : 0;
+    return {
+      id: match ? `drawing-${number}` : path,
+      image,
+      number,
+    };
+  })
+  .sort((a, b) => a.number - b.number);
+
+const prioritizedNumbers = [3, 9, 10];
+const prioritizedDrawings = prioritizedNumbers
+  .map((target) => allDrawings.find((item) => item.number === target))
+  .filter((item): item is DrawingItem => Boolean(item));
+
+const remainingDrawings = allDrawings.filter(
+  (item) => !prioritizedNumbers.includes(item.number)
+);
+
+const drawingSeries: DrawingItem[] = [...prioritizedDrawings, ...remainingDrawings];
+
+const zenSeries: DrawingItem[] = Object.entries(zenImports)
+  .map(([path, image]) => {
+    const match = path.match(/zen(\d+)/i);
+    const number = match ? Number(match[1]) : 0;
+    return {
+      id: match ? `zen-${number}` : path,
+      image,
+      number,
+    };
+  })
+  .sort((a, b) => a.number - b.number);
 
 const Gallery = () => {
   const { t, tObject, language } = useLanguage();
@@ -34,12 +66,12 @@ const Gallery = () => {
   const [currency, setCurrency] = useState<'brl' | 'usd'>('brl');
 
   const filteredArtworks = useMemo(
-    () => artworks.filter((artwork) => filter !== 'drawing' && artwork.type === filter),
+    () => artworks.filter((artwork) => filter !== 'drawing' && filter !== 'zen' && artwork.type === filter),
     [filter]
   );
 
   useEffect(() => {
-    if (filter === 'drawing') {
+    if (filter === 'drawing' || filter === 'zen') {
       setSelectedArtwork(null);
     } else {
       setSelectedDrawing(null);
@@ -57,9 +89,11 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const filters = tObject<Record<'original' | 'copy' | 'drawings', string>>('gallery.filters');
+  const filters = tObject<Record<'original' | 'drawings' | 'zen', string>>('gallery.filters');
   const isDrawingFilter = filter === 'drawing';
+  const isZenFilter = filter === 'zen';
   const drawingTitlePrefix = language === 'pt' ? 'Desenho' : 'Drawing';
+  const zenTitlePrefix = language === 'pt' ? 'Zen' : 'Zen';
 
   return (
     <Layout>
@@ -80,16 +114,16 @@ const Gallery = () => {
               {filters.original}
             </button>
             <button
-              onClick={() => setFilter('copy')}
-              className={`gallery-filter-button ${filter === 'copy' ? 'is-active' : ''}`}
-            >
-              {filters.copy}
-            </button>
-            <button
               onClick={() => setFilter('drawing')}
               className={`gallery-filter-button ${filter === 'drawing' ? 'is-active' : ''}`}
             >
               {filters.drawings}
+            </button>
+            <button
+              onClick={() => setFilter('zen')}
+              className={`gallery-filter-button ${filter === 'zen' ? 'is-active' : ''}`}
+            >
+              {filters.zen}
             </button>
           </div>
 
@@ -115,17 +149,40 @@ const Gallery = () => {
       <section className="gallery-grid-wrap">
         <div className="gallery-grid-container">
           <div className="gallery-grid">
-            {isDrawingFilter
+            {isZenFilter
+              ? zenSeries.map((zen, index) => (
+                  <div
+                    key={zen.id}
+                    className="artwork-card drawing-card gallery-item group"
+                    onClick={() => setSelectedDrawing(zen)}
+                    style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
+                  >
+                    <img
+                      src={zen.image}
+                      alt={`${zenTitlePrefix} ${String(zen.number).padStart(2, '0')}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-charcoal/80 to-transparent">
+                      <h3 className="text-warm-white text-lg font-medium">
+                        {`${zenTitlePrefix} ${String(zen.number).padStart(2, '0')}`}
+                      </h3>
+                    </div>
+                  </div>
+                ))
+              : isDrawingFilter
               ? drawingSeries.map((drawing, index) => (
                   <div
                     key={drawing.id}
-                    className="artwork-card drawing-card group"
+                    className="artwork-card drawing-card gallery-item group"
                     onClick={() => setSelectedDrawing(drawing)}
-                    style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer', aspectRatio: '3 / 4' }}
+                    style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
                   >
                     <img
                       src={drawing.image}
                       alt={`${drawingTitlePrefix} ${String(drawing.number).padStart(2, '0')}`}
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-x-0 bottom-0 p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-charcoal/80 to-transparent">
                       <h3 className="text-warm-white text-lg font-medium">
@@ -137,7 +194,7 @@ const Gallery = () => {
               : filteredArtworks.map((artwork, index) => (
                   <div
                     key={artwork.id}
-                    className="artwork-card aspect-square group"
+                    className="artwork-card gallery-item group"
                     onClick={() => setSelectedArtwork(artwork)}
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
@@ -145,6 +202,8 @@ const Gallery = () => {
                       src={artwork.image}
                       alt={artwork.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-x-0 bottom-0 p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-charcoal/80 to-transparent">
                       <h3 className="text-warm-white text-lg font-medium">{artwork.title}</h3>
@@ -154,7 +213,7 @@ const Gallery = () => {
                 ))}
           </div>
 
-          {!isDrawingFilter && filteredArtworks.length === 0 && (
+          {!isDrawingFilter && !isZenFilter && filteredArtworks.length === 0 && (
             <p className="text-center text-muted-foreground py-12">
               {t('gallery.empty')}
             </p>

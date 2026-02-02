@@ -11,6 +11,7 @@ const Header = () => {
     { to: '/', label: t('navigation.home') },
     { to: '/sobre', label: t('navigation.about') },
     { to: '/gravuras', label: t('navigation.gallery') },
+    { to: '/exposicoes', label: t('navigation.exhibitions') },
     { to: '/contato', label: t('navigation.contact') },
   ];
 

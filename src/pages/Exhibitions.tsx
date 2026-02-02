@@ -1,0 +1,53 @@
+import Layout from '@/components/Layout';
+import { useLanguage } from '@/context/LanguageContext';
+
+const exhibitionsImage = new URL('../assets/expo01.jpeg?w=800&format=webp;jpg', import.meta.url).href;
+
+const Exhibitions = () => {
+  const { t, tArray } = useLanguage();
+  const exhibitions = tArray('exhibitions.items');
+
+  return (
+    <Layout>
+      <section className="py-16 lg:py-24 bg-secondary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="section-title">{t('exhibitions.title')}</h1>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {t('exhibitions.intro')}
+                </p>
+              </div>
+              <ul className="space-y-5">
+                {exhibitions.map((entry, index) => {
+                  const [year, ...rest] = entry.split(' - ');
+                  const description = rest.join(' - ').trim();
+                  return (
+                    <li key={`${year}-${index}`} className="flex gap-4 items-start">
+                      <span className="text-lg font-semibold text-foreground min-w-[72px]">
+                        {year}
+                      </span>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {description}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              <img
+                src={exhibitionsImage}
+                alt={t('exhibitions.imageAlt')}
+                className="w-full max-w-[32rem] h-auto object-contain rounded-sm shadow-lg mx-auto lg:mx-0"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Exhibitions;

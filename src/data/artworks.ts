@@ -1,11 +1,9 @@
-const asset = (relativePath: string) => new URL(relativePath, import.meta.url).href;
-
-const artwork1 = asset('../assets/estandarte01.jpg');
-const artwork2 = asset('../assets/estandarte02.jpg');
-const artwork3 = asset('../assets/estandarte03.jpg');
-const artwork4 = asset('../assets/estandarte04.jpg');
-const artwork5 = asset('../assets/estandarte 5.jpg');
-const artwork6 = asset('../assets/estandarte 6.jpg');
+import artwork1 from '@/assets/estandartes/estandarte01.jpg';
+import artwork2 from '@/assets/estandartes/estandarte02.jpg';
+import artwork3 from '@/assets/estandartes/estandarte03.jpg';
+import artwork4 from '@/assets/estandartes/estandarte04.jpg';
+import artwork5 from '@/assets/estandartes/estandarte05.jpg';
+import artwork6 from '@/assets/estandartes/estandarte06.jpg';
 
 export interface Artwork {
   id: string;
@@ -83,7 +81,7 @@ export const artworks: Artwork[] = [
     description: 'Esta obra convida o espectador a uma jornada interior. A rosa dos ventos não aponta para o norte geográfico, mas para os caminhos do autoconhecimento, simbolizados pelos elementos naturais que a circundam.',
     descriptionEn: 'This work invites the viewer on an inward journey. The compass rose does not point to the geographic north, but to the paths of self-knowledge, symbolized by the natural elements surrounding it.',
     image: artwork4,
-    type: 'copy',
+    type: 'original',
     prices: {
       original: { brl: 9800, usd: 1960 },
       copy: { brl: 980, usd: 196 },
@@ -115,7 +113,7 @@ export const artworks: Artwork[] = [
     description: 'O cosmos como metáfora do inconsciente. Esta obra mapeia as constelações internas que guiam nossa existência, com símbolos que remetem tanto à astronomia quanto à alquimia medieval.',
     descriptionEn: 'The cosmos as a metaphor for the unconscious. This piece maps the inner constellations that guide our existence, with symbols that evoke both astronomy and medieval alchemy.',
     image: artwork6,
-    type: 'copy',
+    type: 'original',
     prices: {
       original: { brl: 11000, usd: 2200 },
       copy: { brl: 1100, usd: 220 },
