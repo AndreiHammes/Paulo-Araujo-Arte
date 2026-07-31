@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Mail, MapPin, Phone } from "lucide-react";
-import LogoAtelier from "@/assets/novo logo atelier.png";
+import LogoAtelier from "@/assets/novo logo atelier.png?w=360&format=webp&quality=82";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function Footer() {
@@ -10,37 +9,29 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-column footer-brand">
+        <div className="footer-brand">
           <Link to="/">
             <img src={LogoAtelier} alt={t("about.signatureAlt")}
             />
           </Link>
-          <p>{t("footer.description")}</p>
         </div>
 
-        <div className="footer-column footer-contact">
-          <h4 className="footer-title">{t("footer.contactTitle")}</h4>
-          <a className="footer-contact-item" href="mailto:paulodearaujo.arte@gmail.com">
-            <Mail aria-hidden="true" />
-            <span>{t("contact.emailValue")}</span>
+        <div className="footer-links" aria-label={t("footer.contactTitle")}>
+          <a className="footer-link" href="mailto:paulodearaujo.arte@gmail.com">
+            {t("contact.emailValue")}
           </a>
-          <a className="footer-contact-item" href="tel:+5551984846665">
-            <Phone aria-hidden="true" />
-            <span>{t("contact.phoneValue")}</span>
+          <a className="footer-link" href="tel:+5551984846665">
+            {t("contact.phoneValue")}
           </a>
           <a
-            className="footer-contact-item"
+            className="footer-link"
             href="https://www.instagram.com/atelierpaulodearaujo/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Instagram aria-hidden="true" />
-            <span>@atelierpaulodearaujo</span>
+            @atelierpaulodearaujo
           </a>
-          <div className="footer-contact-item" aria-label={t("contact.mapCity")}>
-            <MapPin aria-hidden="true" />
-            <span>{t("contact.mapCity")}</span>
-          </div>
+          <span className="footer-link footer-link-static">{t("contact.mapCity")}</span>
         </div>
       </div>
 

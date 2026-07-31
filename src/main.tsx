@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import assinaturaFavicon from "@/assets/assinatura.png";
+import assinaturaFavicon from "@/assets/assinatura.png?w=64&format=webp&quality=80";
 
 const ensureFavicon = () => {
 	const existing = document.querySelector<HTMLLinkElement>("link[rel='icon']");

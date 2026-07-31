@@ -1,7 +1,6 @@
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/context/LanguageContext';
-
-const exhibitionsImage = new URL('../assets/expo01.jpeg?w=800&format=webp;jpg', import.meta.url).href;
+import exhibitionsImage from '@/assets/expo01.jpeg?w=800&format=webp&quality=76';
 
 const Exhibitions = () => {
   const { t, tArray } = useLanguage();

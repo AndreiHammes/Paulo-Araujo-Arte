@@ -47,7 +47,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Header */}
-      <section style={{ padding: '40px 25px', backgroundColor: 'white', textAlign: 'center' }}>
+      <section style={{ padding: '28px 25px 20px', backgroundColor: 'white', textAlign: 'center' }}>
         <h1 style={{ fontSize: '36px', fontWeight: '300', marginBottom: '15px', textTransform: 'uppercase' }}>
           {t('contact.title')}
         </h1>
@@ -57,18 +57,18 @@ const Contact = () => {
       </section>
 
       {/* Content */}
-      <section style={{ padding: '60px 25px' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      <section style={{ padding: '24px 25px 38px', backgroundColor: 'white' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-              gap: '60px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '36px',
             }}
           >
             {/* Contact Info */}
             <div>
-              <h2 style={{ fontSize: '28px', fontWeight: '300', marginBottom: '30px', textTransform: 'uppercase' }}>
+              <h2 style={{ fontSize: '26px', fontWeight: '300', marginBottom: '20px', textTransform: 'uppercase' }}>
                 {t('contact.talkToMe')}
               </h2>
 
@@ -83,7 +83,7 @@ const Contact = () => {
                 {t('contact.whatsappCta')}
               </a>
 
-              <div className="space-y-6 mb-10">
+              <div className="space-y-5 mb-8">
                 <a
                   href={`mailto:${t('contact.emailValue')}`}
                   className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
@@ -242,16 +242,6 @@ const Contact = () => {
                 </button>
               </form>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Map Placeholder */}
-      <section className="h-80 bg-muted relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <MapPin size={48} className="text-primary mx-auto mb-4" />
-            <p className="text-muted-foreground">{t('contact.mapCity')}</p>
           </div>
         </div>
       </section>

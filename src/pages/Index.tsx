@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import estandarteDois from '@/assets/estandartes/estandarte02.jpg';
+import estandarteDois from '@/assets/estandartes/estandarte02.jpg?w=1920&format=webp&quality=78';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Index = () => {
@@ -30,7 +30,7 @@ const Index = () => {
           )}
         </div>
         <div className="hero-image">
-          <img src={estandarteDois} alt="Estandarte 02" />
+          <img src={estandarteDois} alt="Estandarte 02" fetchPriority="high" decoding="async" />
         </div>
       </div>
     </Layout>

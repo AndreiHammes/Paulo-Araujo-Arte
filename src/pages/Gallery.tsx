@@ -10,27 +10,45 @@ type FilterType = 'original' | 'drawing' | 'zen';
 interface DrawingItem {
   id: string;
   image: string;
+  previewImage: string;
   number: number;
+  kind: 'drawing' | 'zen';
 }
 
-const drawingImports = import.meta.glob<string>('../assets/desenhos/*.{png,jpg,jpeg}', {
+const drawingPreviewImports = import.meta.glob<string>('../assets/desenhos/*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
+  query: '?w=700&format=webp&quality=70',
 });
 
-const zenImports = import.meta.glob<string>('../assets/zen/*.{png,jpg,jpeg}', {
+const drawingFullImports = import.meta.glob<string>('../assets/desenhos/*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
+  query: '?w=1600&format=webp&quality=78',
 });
 
-const allDrawings: DrawingItem[] = Object.entries(drawingImports)
+const zenPreviewImports = import.meta.glob<string>('../assets/zen/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+  query: '?w=700&format=webp&quality=70',
+});
+
+const zenFullImports = import.meta.glob<string>('../assets/zen/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+  query: '?w=1600&format=webp&quality=78',
+});
+
+const allDrawings: DrawingItem[] = Object.entries(drawingFullImports)
   .map(([path, image]) => {
     const match = path.match(/desenho(\d+)/i);
     const number = match ? Number(match[1]) : 0;
     return {
       id: match ? `drawing-${number}` : path,
       image,
+      previewImage: drawingPreviewImports[path] ?? image,
       number,
+      kind: 'drawing',
     };
   })
   .sort((a, b) => a.number - b.number);
@@ -46,14 +64,16 @@ const remainingDrawings = allDrawings.filter(
 
 const drawingSeries: DrawingItem[] = [...prioritizedDrawings, ...remainingDrawings];
 
-const zenSeries: DrawingItem[] = Object.entries(zenImports)
+const zenSeries: DrawingItem[] = Object.entries(zenFullImports)
   .map(([path, image]) => {
     const match = path.match(/zen(\d+)/i);
     const number = match ? Number(match[1]) : 0;
     return {
       id: match ? `zen-${number}` : path,
       image,
+      previewImage: zenPreviewImports[path] ?? image,
       number,
+      kind: 'zen',
     };
   })
   .sort((a, b) => a.number - b.number);
@@ -158,16 +178,11 @@ const Gallery = () => {
                     style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
                   >
                     <img
-                      src={zen.image}
+                      src={zen.previewImage}
                       alt={`${zenTitlePrefix} ${String(zen.number).padStart(2, '0')}`}
                       loading="lazy"
                       decoding="async"
                     />
-                    <div className="absolute inset-x-0 bottom-0 p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-charcoal/80 to-transparent">
-                      <h3 className="text-warm-white text-lg font-medium">
-                        {`${zenTitlePrefix} ${String(zen.number).padStart(2, '0')}`}
-                      </h3>
-                    </div>
                   </div>
                 ))
               : isDrawingFilter
@@ -179,16 +194,11 @@ const Gallery = () => {
                     style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
                   >
                     <img
-                      src={drawing.image}
+                      src={drawing.previewImage}
                       alt={`${drawingTitlePrefix} ${String(drawing.number).padStart(2, '0')}`}
                       loading="lazy"
                       decoding="async"
                     />
-                    <div className="absolute inset-x-0 bottom-0 p-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-charcoal/80 to-transparent">
-                      <h3 className="text-warm-white text-lg font-medium">
-                        {`${drawingTitlePrefix} ${String(drawing.number).padStart(2, '0')}`}
-                      </h3>
-                    </div>
                   </div>
                 ))
               : filteredArtworks.map((artwork, index) => (
@@ -199,7 +209,7 @@ const Gallery = () => {
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <img
-                      src={artwork.image}
+                      src={artwork.previewImage}
                       alt={artwork.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
@@ -252,11 +262,6 @@ const Gallery = () => {
             >
               <X size={20} />
             </button>
-            <div className="absolute bottom-4 left-4 bg-charcoal/70 text-warm-white px-4 py-2 rounded-sm backdrop-blur-sm">
-              <span className="text-sm tracking-wide">
-                {`${drawingTitlePrefix} ${String(selectedDrawing.number).padStart(2, '0')}`}
-              </span>
-            </div>
           </div>
         </div>
       )}

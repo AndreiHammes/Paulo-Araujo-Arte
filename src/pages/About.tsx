@@ -1,54 +1,31 @@
 import Layout from '@/components/Layout';
 import { useLanguage } from '@/context/LanguageContext';
-
-const perfilImage = new URL('../assets/perfil.png?w=800&format=webp;png', import.meta.url).href;
+import perfilImage from '@/assets/pintando-perto.jpg?w=1400&format=webp&quality=80';
 
 const About = () => {
-  const { t, tArray, tObject } = useLanguage();
+  const { t, tArray } = useLanguage();
   const paragraphs = tArray('about.paragraphs');
-  const influences = tObject<Array<{ icon: string; title: string; description: string }>>('about.influences.items');
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-16 lg:py-24 bg-secondary">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="animate-fade-in">
+      <section className="about-artist-section bg-white">
+        <div className="mx-auto max-w-[1500px] pl-4 sm:pl-5 lg:pl-8 pr-0">
+          <div className="about-artist-layout">
+            <div className="about-artist-text animate-fade-in">
               <h1 className="section-title">{t('about.title')}</h1>
               {paragraphs.map((paragraph, index) => (
-                <p key={index} className="text-lg text-muted-foreground leading-relaxed mb-6 last:mb-0">
+                <p key={index}>
                   {paragraph}
                 </p>
               ))}
             </div>
-            <div>
+            <div className="about-artist-image">
               <img
                 src={perfilImage}
                 alt="Paulo de Araújo"
-                className="w-full max-w-[32rem] h-auto object-contain rounded-sm shadow-lg mx-auto lg:mx-0"
+                className="about-artist-image-media"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Influences */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <h2 className="section-title text-center mb-12">{t('about.influences.title')}</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {influences.map((item, index) => (
-              <div key={`${item.title}-${index}`} className="text-center p-6">
-                <div className="w-16 h-16 mx-auto mb-4 bg-terracotta/10 rounded-full flex items-center justify-center">
-                  <span className="text-2xl">{item.icon}</span>
-                </div>
-                <h3 className="text-lg font-medium mb-2">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">
-                  {item.description}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
