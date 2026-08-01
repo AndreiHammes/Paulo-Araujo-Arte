@@ -9,7 +9,7 @@ const About = () => {
   return (
     <Layout>
       <section className="about-artist-section bg-white">
-        <div className="mx-auto max-w-[1500px] pl-4 sm:pl-5 lg:pl-8 pr-0">
+        <div className="mx-auto max-w-[1500px] pl-0 sm:pl-5 lg:pl-8 pr-0">
           <div className="about-artist-layout">
             <div className="about-artist-text animate-fade-in">
               <h1 className="section-title">{t('about.title')}</h1>

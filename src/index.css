@@ -607,7 +607,7 @@
     }
 
     .about-artist-text {
-      padding: 26px 18px 24px 0;
+      padding: 26px 24px 24px;
     }
 
     .about-artist-text p {
@@ -636,7 +636,8 @@
     .footer-content {
       flex-direction: column;
       gap: 18px;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
     }
 
     .footer-link {
@@ -658,24 +659,73 @@
     .footer-brand {
       width: 100%;
       gap: 0;
-      align-items: flex-start;
-      text-align: left;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-brand a {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     .footer-brand img {
       width: 200px;
+      margin: 0 auto;
     }
 
     .footer-links {
       width: 100%;
-      justify-content: flex-start;
-      gap: 8px 16px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .footer-bottom {
       flex-direction: column;
       gap: 12px;
       text-align: center;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .contact-info-title {
+      text-align: center;
+    }
+
+    .contact-info-whatsapp {
+      justify-content: center;
+    }
+
+    .contact-info-items {
+      width: 100%;
+    }
+
+    .contact-info-item {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .contact-info-item-text {
+      text-align: center;
+    }
+
+    .contact-social {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-social-links {
+      justify-content: center;
     }
   }
 
@@ -727,6 +777,27 @@
   .section-title {
     @apply text-3xl md:text-4xl font-light tracking-wider text-foreground mb-8;
     letter-spacing: normal;
+  }
+
+  .exhibitions-section {
+    background-color: white;
+  }
+
+  .exhibitions-intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(20, 16, 16, 0.7);
+  }
+
+  .exhibitions-year {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(20, 16, 16);
+  }
+
+  .exhibitions-description {
+    line-height: 1.6;
+    color: rgba(20, 16, 16, 0.7);
   }
 
   .whatsapp-btn {

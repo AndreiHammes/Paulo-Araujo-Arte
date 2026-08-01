@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import { Mail, Phone, MapPin, Instagram, Send, MessageCircle } from 'lucide-react';
+import { Mail, Phone, Instagram, Send, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Contact = () => {
@@ -67,8 +67,11 @@ const Contact = () => {
             }}
           >
             {/* Contact Info */}
-            <div>
-              <h2 style={{ fontSize: '26px', fontWeight: '300', marginBottom: '20px', textTransform: 'uppercase' }}>
+            <div className="contact-info">
+              <h2
+                className="contact-info-title"
+                style={{ fontSize: '26px', fontWeight: '300', marginBottom: '20px', textTransform: 'uppercase' }}
+              >
                 {t('contact.talkToMe')}
               </h2>
 
@@ -77,21 +80,21 @@ const Contact = () => {
                 href="https://wa.me/5551984846665"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="whatsapp-btn text-lg mb-10 inline-flex"
+                className="contact-info-whatsapp whatsapp-btn text-lg mb-10 inline-flex"
               >
                 <MessageCircle size={24} />
                 {t('contact.whatsappCta')}
               </a>
 
-              <div className="space-y-5 mb-8">
+              <div className="contact-info-items space-y-5 mb-8">
                 <a
                   href={`mailto:${t('contact.emailValue')}`}
-                  className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
+                  className="contact-info-item flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
                 >
                   <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <Mail size={20} className="text-primary" />
                   </div>
-                  <div>
+                  <div className="contact-info-item-text">
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
                       {t('contact.emailLabel')}
                     </span>
@@ -101,40 +104,26 @@ const Contact = () => {
 
                 <a
                   href="tel:+5551984846665"
-                  className="flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
+                  className="contact-info-item flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
                 >
                   <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:bg-primary/10 transition-colors">
                     <Phone size={20} className="text-primary" />
                   </div>
-                  <div>
+                  <div className="contact-info-item-text">
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
                       {t('contact.phoneLabel')}
                     </span>
                     <span>{t('contact.phoneValue')}</span>
                   </div>
                 </a>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center">
-                    <MapPin size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
-                      {t('contact.studioLabel')}
-                    </span>
-                    <span className="text-foreground whitespace-pre-line">
-                      {t('contact.studioAddress')}
-                    </span>
-                  </div>
-                </div>
               </div>
 
               {/* Social Links */}
-              <div>
+              <div className="contact-social">
                 <h3 className="text-xs tracking-widest uppercase text-muted-foreground mb-4">
                   {t('contact.socialTitle')}
                 </h3>
-                <div className="flex gap-4">
+                <div className="contact-social-links flex gap-4">
                   <a
                     href="https://www.instagram.com/atelierpaulodearaujo/"
                     target="_blank"

@@ -8,13 +8,13 @@ const Exhibitions = () => {
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24 bg-secondary">
+      <section className="exhibitions-section py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="section-title">{t('exhibitions.title')}</h1>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="exhibitions-intro">
                   {t('exhibitions.intro')}
                 </p>
               </div>
@@ -24,10 +24,10 @@ const Exhibitions = () => {
                   const description = rest.join(' - ').trim();
                   return (
                     <li key={`${year}-${index}`} className="flex gap-4 items-start">
-                      <span className="text-lg font-semibold text-foreground min-w-[72px]">
+                      <span className="exhibitions-year min-w-[72px]">
                         {year}
                       </span>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="exhibitions-description">
                         {description}
                       </p>
                     </li>
