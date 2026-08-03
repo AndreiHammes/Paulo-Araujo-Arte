@@ -76,14 +76,6 @@ const translations: Translations = {
         'Sou artista visual natural de Porto Alegre, no sul do Brasil. Minha pintura estabelece um diálogo entre símbolos universais e dimensões da natureza interior, articulando referências da cultura africana, dos povos originários e da tradição da arte brasileira. O trabalho investiga a relação entre forma, geometria e espaço como estruturas simbólicas capazes de revelar uma beleza sutil, enigmática e convidativa. Cada obra é concebida como uma peça única, resultado de um processo atento e sensível, onde matéria, gesto e significado se entrelaçam. Proponho ao observador uma experiência de contemplação e conexão, abrindo caminhos para leituras pessoais e afetivas. Situada no encontro entre tradição e contemporaneidade, dialoga com o tempo, a memória e o imaginário coletivo, especialmente adequada para colecionadores, projetos curatoriais e trabalhos por encomenda.'
       ],
       signatureAlt: 'Logo do Atelier Paulo de Araújo',
-      influences: {
-        title: 'Influências',
-        items: [
-          { icon: '🌍', title: 'Arte Africana', description: 'Máscaras, padrões geométricos e a força expressiva da arte do continente-mãe.' },
-          { icon: '🌿', title: 'Povos Originários', description: 'Cosmologia indígena, grafismos e a conexão sagrada com a natureza.' },
-          { icon: '🎨', title: 'Modernismo Brasileiro', description: 'A liberdade formal e a identidade cultural do movimento modernista.' },
-        ],
-      },
     },
     contact: {
       title: 'Contato',
@@ -120,7 +112,6 @@ const translations: Translations = {
       mapCity: 'Porto Alegre, RS - Brasil',
     },
     footer: {
-      description: 'Arte que conecta tradição e inovação, explorando a essência da natureza interior através de formas geométricas e símbolos universais.',
       navigationTitle: 'Navegação',
       contactTitle: 'Contato',
       rights: '© {year} Paulo de Araújo. Todos os direitos reservados.',
@@ -148,8 +139,7 @@ const translations: Translations = {
     home: {
       hero: {
         paragraphs: [
-          'An artist born in Porto Alegre, in southern Brazil. His paintings create a dialogue between universal symbols and the essence of the inner nature, influenced by African culture, Indigenous peoples, and the rich tradition of Brazilian art.',
-          'Paulo de Araújo explores geometric forms and spatial play to reveal the mysterious, inviting beauty of his works. Each piece is a unique expression that connects the viewer to something greater and transcendent. Discover a world where tradition and innovation meet.'
+          'I harness the power and energy of symbols as a means of intimate and universal connection. My painting invites a deep dive into the forgotten laws of our inner nature, employing geometric interplay, contrasts between symmetry and asymmetry, curves, straight lines, and the balance of fullness and emptiness. Each work emerges as a fragment of a reinvented universe, inviting the viewer to explore meanings that transcend mere objectivity. For me, creating is an act of opening a portal to a multidimensional realm where form, color, and silence converge in a unique expression of beauty and mystery.'
         ],
         moreButton: {
           show: 'See more',
@@ -196,20 +186,11 @@ const translations: Translations = {
       whatsappMessage: 'Hello! I am interested in the artwork "{title}" ({year}). Could you send me more information?',
     },
     about: {
-      title: 'The Artist',
+      title: '',
       paragraphs: [
-        'Paulo de Araújo is a Brazilian visual artist whose work transcends cultural and temporal boundaries. Born in Porto Alegre, he developed from an early age a fascination with the visual narratives of traditional peoples.',
-        'His practice is a unique synthesis of African, Indigenous Brazilian, and European influences, woven through ancestral and contemporary techniques. Each print is a portal to worlds where the sacred and the everyday meet.'
+        'I am a visual artist originally from Porto Alegre, in southern Brazil. My painting establishes a dialogue between universal symbols and dimensions of the inner self, drawing upon references from African culture, Indigenous peoples, and the tradition of Brazilian art. The work explores the relationship between form, geometry, and space as symbolic structures capable of revealing a beauty that is subtle, enigmatic, and inviting. Each piece is conceived as a unique work—the result of a mindful, sensitive process in which material, gesture, and meaning intertwine. I invite the viewer to experience contemplation and connection, opening pathways for personal and emotional interpretations. Situated at the intersection of tradition and contemporaneity, the work engages with time, memory, and the collective imagination, making it particularly well-suited for collectors, curatorial projects, and commissions.'
       ],
       signatureAlt: 'Paulo de Araújo Atelier Logo',
-      influences: {
-        title: 'Influences',
-        items: [
-          { icon: '🌍', title: 'African Art', description: 'Masks, geometric patterns, and the expressive power of the mother continent.' },
-          { icon: '🌿', title: 'Indigenous Peoples', description: 'Indigenous cosmology, graphic motifs, and a sacred bond with nature.' },
-          { icon: '🎨', title: 'Brazilian Modernism', description: 'The formal freedom and cultural identity of the modernist movement.' },
-        ],
-      },
     },
     contact: {
       title: 'Contact',
@@ -246,7 +227,6 @@ const translations: Translations = {
       mapCity: 'Porto Alegre, RS - Brazil',
     },
     footer: {
-      description: 'Art that connects tradition and innovation, exploring the essence of the inner nature through geometric forms and universal symbols.',
       navigationTitle: 'Navigation',
       contactTitle: 'Contact',
       rights: '© {year} Paulo de Araújo. All rights reserved.',

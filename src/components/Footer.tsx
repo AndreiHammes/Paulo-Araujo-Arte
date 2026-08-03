@@ -20,7 +20,7 @@ export function Footer() {
           <a className="footer-link" href="mailto:paulodearaujo.arte@gmail.com">
             {t("contact.emailValue")}
           </a>
-          <a className="footer-link" href="tel:+5551984846665">
+          <a className="footer-link" href="https://wa.me/5551984846665" target="_blank" rel="noopener noreferrer">
             {t("contact.phoneValue")}
           </a>
           <a

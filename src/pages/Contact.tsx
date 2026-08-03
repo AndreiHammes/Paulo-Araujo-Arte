@@ -43,6 +43,7 @@ const Contact = () => {
   };
 
   const subjectOptions = formTexts.subjectOptions ?? [];
+  const whatsappPhoneLink = 'https://wa.me/5551984846665';
 
   return (
     <Layout>
@@ -77,7 +78,7 @@ const Contact = () => {
 
               {/* WhatsApp CTA */}
               <a
-                href="https://wa.me/5551984846665"
+                  href="https://wa.me/5551984846665"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-info-whatsapp whatsapp-btn text-lg mb-10 inline-flex"
@@ -103,7 +104,9 @@ const Contact = () => {
                 </a>
 
                 <a
-                  href="tel:+5551984846665"
+                  href={whatsappPhoneLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact-info-item flex items-start gap-4 text-foreground hover:text-primary transition-colors group"
                 >
                   <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:bg-primary/10 transition-colors">

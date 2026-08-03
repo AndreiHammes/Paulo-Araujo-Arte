@@ -257,7 +257,7 @@ const Gallery = () => {
             />
             <button
               onClick={() => setSelectedDrawing(null)}
-              className="absolute top-4 right-4 w-10 h-10 bg-charcoal/80 text-warm-white rounded-full flex items-center justify-center hover:bg-charcoal transition-colors"
+              className="absolute top-4 right-4 z-20 w-10 h-10 bg-charcoal/85 text-warm-white rounded-full flex items-center justify-center border border-white/15 shadow-lg backdrop-blur-sm hover:bg-charcoal transition-colors"
               aria-label="Fechar"
             >
               <X size={20} />
