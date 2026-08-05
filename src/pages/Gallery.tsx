@@ -4,15 +4,26 @@ import Layout from '@/components/Layout';
 import ArtworkModal from '@/components/ArtworkModal';
 import { artworks, Artwork } from '@/data/artworks';
 import { useLanguage } from '@/context/LanguageContext';
+import abstrataGravuraImage from '@/assets/gravura.jpg?w=1600&format=webp&quality=78';
+import abstrataGravuraPreview from '@/assets/gravura.jpg?w=700&format=webp&quality=70';
+import alegoriaLilasImage from '@/assets/alegoria lilás.jpg?w=1600&format=webp&quality=78';
+import alegoriaLilasPreview from '@/assets/alegoria lilás.jpg?w=700&format=webp&quality=70';
+import abstratoImage from '@/assets/abstrato.jpg?w=1600&format=webp&quality=78';
+import abstratoPreview from '@/assets/abstrato.jpg?w=700&format=webp&quality=70';
+import gravura02Image from '@/assets/gravura02.jpg?w=1600&format=webp&quality=78';
+import gravura02Preview from '@/assets/gravura02.jpg?w=700&format=webp&quality=70';
 
-type FilterType = 'original' | 'drawing' | 'zen';
+type FilterType = 'original' | 'drawing' | 'zen' | 'photography' | 'abstract';
+
+type SeriesKind = 'drawing' | 'zen' | 'photography' | 'abstract';
 
 interface DrawingItem {
   id: string;
   image: string;
   previewImage: string;
   number: number;
-  kind: 'drawing' | 'zen';
+  kind: SeriesKind;
+  title?: string;
 }
 
 const drawingPreviewImports = import.meta.glob<string>('../assets/desenhos/*.{png,jpg,jpeg}', {
@@ -38,6 +49,18 @@ const zenFullImports = import.meta.glob<string>('../assets/zen/*.{png,jpg,jpeg}'
   import: 'default',
   query: '?w=1600&format=webp&quality=78',
 });
+
+const photoPreviewImports = import.meta.glob<string>('../assets/areia/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+  query: '?w=700&format=webp&quality=70',
+});
+
+const photoFullImports = import.meta.glob<string>('../assets/areia/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+  query: '?w=1600&format=webp&quality=78',
+  });
 
 const allDrawings: DrawingItem[] = Object.entries(drawingFullImports)
   .map(([path, image]) => {
@@ -78,6 +101,55 @@ const zenSeries: DrawingItem[] = Object.entries(zenFullImports)
   })
   .sort((a, b) => a.number - b.number);
 
+const photographySeries: DrawingItem[] = Object.entries(photoFullImports)
+  .map(([path, image]) => {
+    const match = path.match(/areias(?:_(\d+))?/i);
+    const number = match ? (match[1] ? Number(match[1]) : 1) : 0;
+    return {
+      id: match ? `photo-${number}` : path,
+      image,
+      previewImage: photoPreviewImports[path] ?? image,
+      number,
+      kind: 'photography',
+    };
+  })
+  .sort((a, b) => a.number - b.number);
+
+const abstractSeries: DrawingItem[] = [
+  {
+    id: 'abstract-1',
+    title: 'Alegoria Lilás',
+    image: alegoriaLilasImage,
+    previewImage: alegoriaLilasPreview,
+    number: 1,
+    kind: 'abstract',
+  },
+  {
+    id: 'abstract-2',
+    title: 'Abstrata Gravura',
+    image: abstrataGravuraImage,
+    previewImage: abstrataGravuraPreview,
+    number: 2,
+    kind: 'abstract',
+  },
+  {
+    id: 'abstract-3',
+    title: 'Gravura 02',
+    image: gravura02Image,
+    previewImage: gravura02Preview,
+    number: 3,
+    kind: 'abstract',
+  },
+  {
+    id: 'abstract-4',
+    title: 'Abstrato',
+    image: abstratoImage,
+    previewImage: abstratoPreview,
+    number: 4,
+    kind: 'abstract',
+  },
+];
+
 const Gallery = () => {
   const { t, tObject, language } = useLanguage();
   const [filter, setFilter] = useState<FilterType>('original');
@@ -86,12 +158,12 @@ const Gallery = () => {
   const [currency, setCurrency] = useState<'brl' | 'usd'>('brl');
 
   const filteredArtworks = useMemo(
-    () => artworks.filter((artwork) => filter !== 'drawing' && filter !== 'zen' && artwork.type === filter),
+    () => artworks.filter((artwork) => !['drawing', 'zen', 'photography', 'abstract'].includes(filter) && artwork.type === filter),
     [filter]
   );
 
   useEffect(() => {
-    if (filter === 'drawing' || filter === 'zen') {
+    if (['drawing', 'zen', 'photography', 'abstract'].includes(filter)) {
       setSelectedArtwork(null);
     } else {
       setSelectedDrawing(null);
@@ -109,11 +181,38 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const filters = tObject<Record<'original' | 'drawings' | 'zen', string>>('gallery.filters');
+  const filters = tObject<Record<'original' | 'drawings' | 'zen' | 'photography' | 'abstract', string>>('gallery.filters');
   const isDrawingFilter = filter === 'drawing';
   const isZenFilter = filter === 'zen';
+  const isPhotographyFilter = filter === 'photography';
+  const isAbstractFilter = filter === 'abstract';
   const drawingTitlePrefix = language === 'pt' ? 'Desenho' : 'Drawing';
   const zenTitlePrefix = language === 'pt' ? 'Zen' : 'Zen';
+  const photographyTitlePrefix = language === 'pt' ? 'Fotografia' : 'Photography';
+  const abstractTitlePrefix = language === 'pt' ? 'Abstrato' : 'Abstract';
+  const activeSeries =
+    filter === 'drawing'
+      ? drawingSeries
+      : filter === 'zen'
+      ? zenSeries
+      : filter === 'photography'
+      ? photographySeries
+      : filter === 'abstract'
+      ? abstractSeries
+      : null;
+
+  const getSeriesLabel = (item: DrawingItem) => {
+    if (item.kind === 'drawing') {
+      return `${drawingTitlePrefix} ${String(item.number).padStart(2, '0')}`;
+    }
+    if (item.kind === 'zen') {
+      return `${zenTitlePrefix} ${String(item.number).padStart(2, '0')}`;
+    }
+    if (item.kind === 'photography') {
+      return `${photographyTitlePrefix} ${String(item.number).padStart(2, '0')}`;
+    }
+    return item.title ?? `${abstractTitlePrefix} ${String(item.number).padStart(2, '0')}`;
+  };
 
   return (
     <Layout>
@@ -145,6 +244,18 @@ const Gallery = () => {
             >
               {filters.zen}
             </button>
+            <button
+              onClick={() => setFilter('photography')}
+              className={`gallery-filter-button ${filter === 'photography' ? 'is-active' : ''}`}
+            >
+              {filters.photography}
+            </button>
+            <button
+              onClick={() => setFilter('abstract')}
+              className={`gallery-filter-button ${filter === 'abstract' ? 'is-active' : ''}`}
+            >
+              {filters.abstract}
+            </button>
           </div>
 
           <div className="gallery-currency">
@@ -169,33 +280,17 @@ const Gallery = () => {
       <section className="gallery-grid-wrap">
         <div className="gallery-grid-container">
           <div className="gallery-grid">
-            {isZenFilter
-              ? zenSeries.map((zen, index) => (
+            {activeSeries
+              ? activeSeries.map((item, index) => (
                   <div
-                    key={zen.id}
+                    key={item.id}
                     className="artwork-card drawing-card gallery-item group"
-                    onClick={() => setSelectedDrawing(zen)}
+                    onClick={() => setSelectedDrawing(item)}
                     style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
                   >
                     <img
-                      src={zen.previewImage}
-                      alt={`${zenTitlePrefix} ${String(zen.number).padStart(2, '0')}`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                ))
-              : isDrawingFilter
-              ? drawingSeries.map((drawing, index) => (
-                  <div
-                    key={drawing.id}
-                    className="artwork-card drawing-card gallery-item group"
-                    onClick={() => setSelectedDrawing(drawing)}
-                    style={{ animationDelay: `${index * 60}ms`, cursor: 'pointer' }}
-                  >
-                    <img
-                      src={drawing.previewImage}
-                      alt={`${drawingTitlePrefix} ${String(drawing.number).padStart(2, '0')}`}
+                      src={item.previewImage}
+                      alt={getSeriesLabel(item)}
                       loading="lazy"
                       decoding="async"
                     />
@@ -223,7 +318,7 @@ const Gallery = () => {
                 ))}
           </div>
 
-          {!isDrawingFilter && !isZenFilter && filteredArtworks.length === 0 && (
+          {!isDrawingFilter && !isZenFilter && !isPhotographyFilter && !isAbstractFilter && filteredArtworks.length === 0 && (
             <p className="text-center text-muted-foreground py-12">
               {t('gallery.empty')}
             </p>
@@ -252,7 +347,7 @@ const Gallery = () => {
           <div className="relative max-w-4xl w-full">
             <img
               src={selectedDrawing.image}
-              alt={`${drawingTitlePrefix} ${String(selectedDrawing.number).padStart(2, '0')}`}
+              alt={getSeriesLabel(selectedDrawing)}
               className="mx-auto max-h-[80vh] w-auto max-w-full object-contain rounded-sm"
             />
             <button

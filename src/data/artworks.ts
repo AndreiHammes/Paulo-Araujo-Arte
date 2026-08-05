@@ -10,6 +10,8 @@ import artwork5 from '@/assets/estandartes/estandarte05.jpg?w=1600&format=webp&q
 import artwork5Preview from '@/assets/estandartes/estandarte05.jpg?w=760&format=webp&quality=72';
 import artwork6 from '@/assets/estandartes/estandarte06.jpg?w=1600&format=webp&quality=80';
 import artwork6Preview from '@/assets/estandartes/estandarte06.jpg?w=760&format=webp&quality=72';
+import artwork7 from '@/assets/estandartes/estandarte07.jpg?w=1600&format=webp&quality=80';
+import artwork7Preview from '@/assets/estandartes/estandarte07.jpg?w=760&format=webp&quality=72';
 
 export interface Artwork {
   id: string;
@@ -43,7 +45,7 @@ export const artworks: Artwork[] = [
     previewImage: artwork1Preview,
     type: 'original',
     prices: {
-      original: { brl: 8500, usd: 1700 },
+      original: { brl: 11500, usd: 2080 },
       copy: { brl: 850, usd: 170 },
     },
   },
@@ -60,7 +62,7 @@ export const artworks: Artwork[] = [
     previewImage: artwork2Preview,
     type: 'original',
     prices: {
-      original: { brl: 7200, usd: 1440 },
+      original: { brl: 11500, usd: 2080 },
       copy: { brl: 720, usd: 144 },
     },
   },
@@ -77,7 +79,7 @@ export const artworks: Artwork[] = [
     previewImage: artwork3Preview,
     type: 'original',
     prices: {
-      original: { brl: 12000, usd: 2400 },
+      original: { brl: 10500, usd: 2040 },
       copy: { brl: 1200, usd: 240 },
     },
   },
@@ -94,7 +96,7 @@ export const artworks: Artwork[] = [
     previewImage: artwork4Preview,
     type: 'original',
     prices: {
-      original: { brl: 9800, usd: 1960 },
+      original: { brl: 10500, usd: 2040 },
       copy: { brl: 980, usd: 196 },
     },
   },
@@ -111,7 +113,7 @@ export const artworks: Artwork[] = [
     previewImage: artwork5Preview,
     type: 'original',
     prices: {
-      original: { brl: 15000, usd: 3000 },
+      original: { brl: 11500, usd: 2080 },
       copy: { brl: 1500, usd: 300 },
     },
   },
@@ -128,8 +130,25 @@ export const artworks: Artwork[] = [
     previewImage: artwork6Preview,
     type: 'original',
     prices: {
-      original: { brl: 11000, usd: 2200 },
+      original: { brl: 10500, usd: 2040 },
       copy: { brl: 1100, usd: 220 },
+    },
+  },
+  {
+    id: '7',
+    title: 'Estandarte Imaginário VII',
+    year: 2025,
+    dimensions: '100 x 70 cm',
+    technique: 'Técnica mista sobre papel algodão',
+    techniqueEn: 'Mixed media on cotton paper',
+    description: 'Obra da série Estandartes Imaginários, em que símbolos solares e formas geométricas criam um campo de contemplação e movimento interno.',
+    descriptionEn: 'Work from the Imaginary Banners series, where solar symbols and geometric forms create a field of contemplation and inner movement.',
+    image: artwork7,
+    previewImage: artwork7Preview,
+    type: 'original',
+    prices: {
+      original: { brl: 10500, usd: 2040 },
+      copy: { brl: 980, usd: 196 },
     },
   },
 ];
