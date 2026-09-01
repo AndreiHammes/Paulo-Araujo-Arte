@@ -12,6 +12,10 @@ import artwork6 from '@/assets/estandartes/estandarte06.jpg?w=1600&format=webp&q
 import artwork6Preview from '@/assets/estandartes/estandarte06.jpg?w=760&format=webp&quality=72';
 import artwork7 from '@/assets/estandartes/estandarte07.jpg?w=1600&format=webp&quality=80';
 import artwork7Preview from '@/assets/estandartes/estandarte07.jpg?w=760&format=webp&quality=72';
+import artwork8 from '@/assets/estandartes/vestigios_3.jpg?w=1600&format=webp&quality=80';
+import artwork8Preview from '@/assets/estandartes/vestigios_3.jpg?w=760&format=webp&quality=72';
+import artwork9 from '@/assets/estandartes/vestigios_site.jpg?w=1600&format=webp&quality=80';
+import artwork9Preview from '@/assets/estandartes/vestigios_site.jpg?w=760&format=webp&quality=72';
 
 export interface Artwork {
   id: string;
@@ -145,6 +149,40 @@ export const artworks: Artwork[] = [
     descriptionEn: 'Work from the Imaginary Banners series, where solar symbols and geometric forms create a field of contemplation and inner movement.',
     image: artwork7,
     previewImage: artwork7Preview,
+    type: 'original',
+    prices: {
+      original: { brl: 10500, usd: 2040 },
+      copy: { brl: 980, usd: 196 },
+    },
+  },
+  {
+    id: '8',
+    title: 'Vestígios 3',
+    year: 2024,
+    dimensions: '80 x 80 cm',
+    technique: 'Técnica mista sobre papel',
+    techniqueEn: 'Mixed media on paper',
+    description: 'Uma obra de ressonância contemplativa, em que marcas, traços e vestígios organizam um espaço de memória e presença simbólica.',
+    descriptionEn: 'A contemplative work in which marks, traces, and vestiges organize a space of memory and symbolic presence.',
+    image: artwork8,
+    previewImage: artwork8Preview,
+    type: 'original',
+    prices: {
+      original: { brl: 9800, usd: 1880 },
+      copy: { brl: 900, usd: 180 },
+    },
+  },
+  {
+    id: '9',
+    title: 'Vestígios Site',
+    year: 2025,
+    dimensions: '110 x 70 cm',
+    technique: 'Técnica mista sobre papel algodão',
+    techniqueEn: 'Mixed media on cotton paper',
+    description: 'Uma composição de presença silenciosa e textura íntima, com formas que sugerem partir, retornar e permanecer como traço vivo do imaginário.',
+    descriptionEn: 'A composition of silent presence and intimate texture, with forms suggesting departure, return, and permanence as living traces of imagination.',
+    image: artwork9,
+    previewImage: artwork9Preview,
     type: 'original',
     prices: {
       original: { brl: 10500, usd: 2040 },

@@ -4,14 +4,18 @@ import Layout from '@/components/Layout';
 import ArtworkModal from '@/components/ArtworkModal';
 import { artworks, Artwork } from '@/data/artworks';
 import { useLanguage } from '@/context/LanguageContext';
-import abstrataGravuraImage from '@/assets/gravura.jpg?w=1600&format=webp&quality=78';
-import abstrataGravuraPreview from '@/assets/gravura.jpg?w=700&format=webp&quality=70';
 import alegoriaLilasImage from '@/assets/alegoria lilás.jpg?w=1600&format=webp&quality=78';
 import alegoriaLilasPreview from '@/assets/alegoria lilás.jpg?w=700&format=webp&quality=70';
 import abstratoImage from '@/assets/abstrato.jpg?w=1600&format=webp&quality=78';
 import abstratoPreview from '@/assets/abstrato.jpg?w=700&format=webp&quality=70';
+import naturezaMortaImage from '@/assets/nateureza morta com taca de vinho (1).jpg?w=1600&format=webp&quality=78';
+import naturezaMortaPreview from '@/assets/nateureza morta com taca de vinho (1).jpg?w=700&format=webp&quality=70';
+import gravura01Image from '@/assets/gravura01.jpg?w=1600&format=webp&quality=78';
+import gravura01Preview from '@/assets/gravura01.jpg?w=700&format=webp&quality=70';
 import gravura02Image from '@/assets/gravura02.jpg?w=1600&format=webp&quality=78';
 import gravura02Preview from '@/assets/gravura02.jpg?w=700&format=webp&quality=70';
+import alta1Image from '@/assets/zen/alta1.jpg?w=1600&format=webp&quality=78';
+import alta1Preview from '@/assets/zen/alta1.jpg?w=700&format=webp&quality=70';
 
 type FilterType = 'original' | 'drawing' | 'zen' | 'photography' | 'abstract';
 
@@ -50,7 +54,7 @@ const zenFullImports = import.meta.glob<string>('../assets/zen/*.{png,jpg,jpeg}'
   query: '?w=1600&format=webp&quality=78',
 });
 
-const photoPreviewImports = import.meta.glob<string>('../assets/areia/*.{png,jpg,jpeg}', {
+const photoPreviewImports = import.meta.glob<string>( '../assets/areia/*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
   query: '?w=700&format=webp&quality=70',
@@ -96,7 +100,7 @@ const zenSeries: DrawingItem[] = Object.entries(zenFullImports)
       image,
       previewImage: zenPreviewImports[path] ?? image,
       number,
-      kind: 'zen',
+      kind: 'zen' as const,
     };
   })
   .sort((a, b) => a.number - b.number);
@@ -126,26 +130,18 @@ const abstractSeries: DrawingItem[] = [
   },
   {
     id: 'abstract-2',
-    title: 'Abstrata Gravura',
-    image: abstrataGravuraImage,
-    previewImage: abstrataGravuraPreview,
+    title: 'Abstrato',
+    image: abstratoImage,
+    previewImage: abstratoPreview,
     number: 2,
     kind: 'abstract',
   },
   {
-    id: 'abstract-3',
+    id: 'abstract-5',
     title: 'Gravura 02',
     image: gravura02Image,
     previewImage: gravura02Preview,
-    number: 3,
-    kind: 'abstract',
-  },
-  {
-    id: 'abstract-4',
-    title: 'Abstrato',
-    image: abstratoImage,
-    previewImage: abstratoPreview,
-    number: 4,
+    number: 5,
     kind: 'abstract',
   },
 ];
