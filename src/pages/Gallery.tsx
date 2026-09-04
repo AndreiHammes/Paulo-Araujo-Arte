@@ -8,14 +8,8 @@ import alegoriaLilasImage from '@/assets/alegoria lilás.jpg?w=1600&format=webp&
 import alegoriaLilasPreview from '@/assets/alegoria lilás.jpg?w=700&format=webp&quality=70';
 import abstratoImage from '@/assets/abstrato.jpg?w=1600&format=webp&quality=78';
 import abstratoPreview from '@/assets/abstrato.jpg?w=700&format=webp&quality=70';
-import naturezaMortaImage from '@/assets/nateureza morta com taca de vinho (1).jpg?w=1600&format=webp&quality=78';
-import naturezaMortaPreview from '@/assets/nateureza morta com taca de vinho (1).jpg?w=700&format=webp&quality=70';
-import gravura01Image from '@/assets/gravura01.jpg?w=1600&format=webp&quality=78';
-import gravura01Preview from '@/assets/gravura01.jpg?w=700&format=webp&quality=70';
 import gravura02Image from '@/assets/gravura02.jpg?w=1600&format=webp&quality=78';
 import gravura02Preview from '@/assets/gravura02.jpg?w=700&format=webp&quality=70';
-import alta1Image from '@/assets/zen/alta1.jpg?w=1600&format=webp&quality=78';
-import alta1Preview from '@/assets/zen/alta1.jpg?w=700&format=webp&quality=70';
 
 type FilterType = 'original' | 'drawing' | 'zen' | 'photography' | 'abstract';
 
@@ -68,28 +62,32 @@ const photoFullImports = import.meta.glob<string>('../assets/areia/*.{png,jpg,jp
 
 const allDrawings: DrawingItem[] = Object.entries(drawingFullImports)
   .map(([path, image]) => {
-    const match = path.match(/desenho(\d+)/i);
-    const number = match ? Number(match[1]) : 0;
+    const match = path.match(/(desenho|tango)(\d+)/i);
+    const seriesName = match?.[1].toLowerCase();
+    const number = match ? Number(match[2]) : 0;
     return {
-      id: match ? `drawing-${number}` : path,
+      id: seriesName === 'tango' ? `tango-${number}` : match ? `drawing-${number}` : path,
       image,
       previewImage: drawingPreviewImports[path] ?? image,
       number,
       kind: 'drawing',
+      ...(seriesName === 'tango' ? { title: 'Tango 01' } : {}),
     };
   })
   .sort((a, b) => a.number - b.number);
 
-const prioritizedNumbers = [3, 9, 10];
-const prioritizedDrawings = prioritizedNumbers
-  .map((target) => allDrawings.find((item) => item.number === target))
+const prioritizedDrawingIds = ['tango-1', 'drawing-3', 'drawing-9', 'drawing-10'];
+const prioritizedDrawings = prioritizedDrawingIds
+  .map((targetId) => allDrawings.find((item) => item.id === targetId))
   .filter((item): item is DrawingItem => Boolean(item));
 
 const remainingDrawings = allDrawings.filter(
-  (item) => !prioritizedNumbers.includes(item.number)
+  (item) => !prioritizedDrawingIds.includes(item.id)
 );
 
 const drawingSeries: DrawingItem[] = [...prioritizedDrawings, ...remainingDrawings];
+
+const zenOrder = (number: number) => (number > 0 ? number : Number.MAX_SAFE_INTEGER);
 
 const zenSeries: DrawingItem[] = Object.entries(zenFullImports)
   .map(([path, image]) => {
@@ -103,7 +101,8 @@ const zenSeries: DrawingItem[] = Object.entries(zenFullImports)
       kind: 'zen' as const,
     };
   })
-  .sort((a, b) => a.number - b.number);
+  // imagens sem numeração na série (ex.: alta1) ficam por último
+  .sort((a, b) => zenOrder(a.number) - zenOrder(b.number));
 
 const photographySeries: DrawingItem[] = Object.entries(photoFullImports)
   .map(([path, image]) => {
@@ -198,6 +197,9 @@ const Gallery = () => {
       : null;
 
   const getSeriesLabel = (item: DrawingItem) => {
+    if (item.title) {
+      return item.title;
+    }
     if (item.kind === 'drawing') {
       return `${drawingTitlePrefix} ${String(item.number).padStart(2, '0')}`;
     }
@@ -207,7 +209,7 @@ const Gallery = () => {
     if (item.kind === 'photography') {
       return `${photographyTitlePrefix} ${String(item.number).padStart(2, '0')}`;
     }
-    return item.title ?? `${abstractTitlePrefix} ${String(item.number).padStart(2, '0')}`;
+    return `${abstractTitlePrefix} ${String(item.number).padStart(2, '0')}`;
   };
 
   return (
