@@ -1,15 +1,8 @@
 import { useState } from 'react';
 import { X, MessageCircle } from 'lucide-react';
-import { Artwork, formatPrice } from '@/data/artworks';
+import { Artwork, COPY_SIZES, CopySizeId, formatPrice } from '@/data/artworks';
 import { useLanguage } from '@/context/LanguageContext';
-
-const SIZE_OPTIONS = [
-  { id: '80', label: '80 x 80 cm', multiplier: 0.8 },
-  { id: '90', label: '90 x 90 cm', multiplier: 1 },
-  { id: '100', label: '100 x 100 cm', multiplier: 1.25 },
-] as const;
-
-type SizeOptionId = typeof SIZE_OPTIONS[number]['id'];
+import { useUsdRate } from '@/hooks/use-usd-rate';
 
 interface ArtworkModalProps {
   artwork: Artwork;
@@ -18,14 +11,21 @@ interface ArtworkModalProps {
 }
 
 const ArtworkModal = ({ artwork, currency, onClose }: ArtworkModalProps) => {
-  const { t } = useLanguage();
-  const [selectedSize, setSelectedSize] = useState<SizeOptionId>('90');
+  const { language, t } = useLanguage();
+  const [selectedSize, setSelectedSize] = useState<CopySizeId>('90');
+  const { rate: usdBrlRate, isLive: isLiveRate } = useUsdRate();
 
-  const activeSize = SIZE_OPTIONS.find((option) => option.id === selectedSize) ?? SIZE_OPTIONS[1];
-  const adjustedPrices = {
-    original: Math.round(artwork.prices.original[currency] * activeSize.multiplier),
-    copy: Math.round(artwork.prices.copy[currency] * activeSize.multiplier),
+  // a obra original tem tamanho fixo (150 x 150 cm); os tamanhos selecionáveis são cópias
+  const activeSize = COPY_SIZES.find((option) => option.id === selectedSize) ?? COPY_SIZES[1];
+  const prices = {
+    original: artwork.priceBrl,
+    copy: activeSize.priceBrl,
   };
+
+  const formattedRate = usdBrlRate.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', {
+    style: 'currency',
+    currency: 'BRL',
+  });
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -75,12 +75,24 @@ const ArtworkModal = ({ artwork, currency, onClose }: ArtworkModalProps) => {
               <p className="text-muted-foreground mb-6">{artwork.year}</p>
 
               <div className="space-y-4 mb-8">
+                <div className="border border-charcoal/20 bg-muted/60 p-4 rounded-sm">
+                  <span className="text-xs tracking-widest uppercase text-muted-foreground">
+                    {t('artworkModal.originalSizeLabel')}
+                  </span>
+                  <p className="text-lg font-medium text-foreground">{artwork.dimensions}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {t('artworkModal.originalSizeNote')}
+                  </p>
+                </div>
                 <div>
                   <span className="text-xs tracking-widest uppercase text-muted-foreground">
                     {t('artworkModal.dimensions')}
                   </span>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {t('artworkModal.dimensionsNote')}
+                  </p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {SIZE_OPTIONS.map((option) => {
+                    {COPY_SIZES.map((option) => {
                       const isActive = option.id === activeSize.id;
                       return (
                         <button
@@ -115,19 +127,27 @@ const ArtworkModal = ({ artwork, currency, onClose }: ArtworkModalProps) => {
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
                       Original
                     </span>
-                    <span className="text-xl font-medium text-foreground">
-                      {formatPrice(adjustedPrices.original, currency)}
+                    <span className="text-xl font-medium text-foreground block">
+                      {formatPrice(prices.original, currency, usdBrlRate)}
                     </span>
+                    <span className="text-xs text-muted-foreground">{artwork.dimensions}</span>
                   </div>
                   <div className="bg-muted p-4 rounded-sm">
                     <span className="text-xs tracking-widest uppercase text-muted-foreground block mb-1">
                       Cópia Assinada
                     </span>
-                    <span className="text-xl font-medium text-foreground">
-                      {formatPrice(adjustedPrices.copy, currency)}
+                    <span className="text-xl font-medium text-foreground block">
+                      {formatPrice(prices.copy, currency, usdBrlRate)}
                     </span>
+                    <span className="text-xs text-muted-foreground">{activeSize.label}</span>
                   </div>
                 </div>
+                {currency === 'usd' && (
+                  <p className="text-xs text-muted-foreground mt-3">
+                    {t('artworkModal.usdRateNote').replace('{rate}', formattedRate)}
+                    {!isLiveRate && ` ${t('artworkModal.usdRateFallback')}`}
+                  </p>
+                )}
               </div>
             </div>
 

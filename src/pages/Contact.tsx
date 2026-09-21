@@ -94,15 +94,24 @@ const Contact = () => {
         }),
       });
 
+      // O FormSubmit responde 200 mesmo em falha; o que vale é o campo `success`.
       const result = await response.json().catch(() => null);
 
       if (!response.ok || String(result?.success) !== 'true') {
-        throw new Error(result?.message ?? 'Falha no envio');
+        const reason = result?.message ?? `HTTP ${response.status}`;
+        console.error(
+          `[contato] O FormSubmit recusou o envio: ${reason}\n` +
+            'Se a mensagem citar "Activation", abra a caixa de ' +
+            `${artistEmail} e clique no link "Activate Form" — isso é necessário uma única vez.`,
+        );
+        setStatus('error');
+        return;
       }
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch {
+    } catch (error) {
+      console.error('[contato] Falha de rede ao enviar a mensagem:', error);
       setStatus('error');
     }
   };

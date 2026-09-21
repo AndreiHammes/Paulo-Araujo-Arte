@@ -16,6 +16,8 @@ import artwork8 from '@/assets/estandartes/vestigios_3.jpg?w=1600&format=webp&qu
 import artwork8Preview from '@/assets/estandartes/vestigios_3.jpg?w=760&format=webp&quality=72';
 import artwork9 from '@/assets/estandartes/vestigios_site.jpg?w=1600&format=webp&quality=80';
 import artwork9Preview from '@/assets/estandartes/vestigios_site.jpg?w=760&format=webp&quality=72';
+import esplendorImage from '@/assets/esplendor em alta recortado.jpg?w=1600&format=webp&quality=80';
+import esplendorPreview from '@/assets/esplendor em alta recortado.jpg?w=760&format=webp&quality=72';
 
 export interface Artwork {
   id: string;
@@ -24,176 +26,159 @@ export interface Artwork {
   dimensions: string;
   technique: string;
   techniqueEn: string;
-  description: string;
-  descriptionEn: string;
   image: string;
   previewImage: string;
   type: 'original' | 'copy';
-  prices: {
-    original: { brl: number; usd: number };
-    copy: { brl: number; usd: number };
-  };
+  /** Valor da obra original, em reais. O valor em dólar é convertido pela cotação do dia. */
+  priceBrl: number;
 }
+
+/** Tamanhos disponíveis para cópias assinadas, com preço fixo em reais. */
+export const COPY_SIZES = [
+  { id: '80', label: '80 x 80 cm', priceBrl: 1700 },
+  { id: '90', label: '90 x 90 cm', priceBrl: 1850 },
+  { id: '100', label: '100 x 100 cm', priceBrl: 2050 },
+] as const;
+
+export type CopySizeId = typeof COPY_SIZES[number]['id'];
 
 export const artworks: Artwork[] = [
   {
+    id: '10',
+    title: 'Esplendor da Estação',
+    year: 2025,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
+    image: esplendorImage,
+    previewImage: esplendorPreview,
+    type: 'original',
+    priceBrl: 10500,
+  },
+  {
     id: '1',
     title: 'Força e céu',
-    year: 2023,
-    dimensions: '100 x 100 cm',
-    technique: 'Gravura em metal sobre papel algodão',
-    techniqueEn: 'Metal engraving on cotton paper',
-    description: 'Esta obra explora a dualidade entre luz e sombra, inspirada nas mandalas africanas e nos símbolos solares presentes em diversas culturas ancestrais. Os círculos concêntricos representam os ciclos da vida e a conexão entre o terreno e o cósmico.',
-    descriptionEn: 'This piece explores the duality between light and shadow, inspired by African mandalas and solar symbols found in ancestral cultures. The concentric circles represent the cycles of life and the bond between the earthly and the cosmic.',
+    year: 2015,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork1,
     previewImage: artwork1Preview,
     type: 'original',
-    prices: {
-      original: { brl: 11500, usd: 2080 },
-      copy: { brl: 850, usd: 170 },
-    },
+    priceBrl: 11500,
   },
   {
     id: '2',
-    title: 'Mandala da Criação',
-    year: 2023,
-    dimensions: '80 x 80 cm',
-    technique: 'Xilogravura com pigmentos naturais',
-    techniqueEn: 'Woodcut with natural pigments',
-    description: 'Inspirada na cosmologia indígena brasileira, esta peça celebra os quatro elementos e sua harmonia com o universo. As formas orgânicas entrelaçadas representam a interdependência de toda a vida na Terra.',
-    descriptionEn: 'Inspired by Brazilian Indigenous cosmology, this piece celebrates the four elements and their harmony with the universe. The interlaced organic forms represent the interdependence of all life on Earth.',
+    title: 'Silêncio Azul',
+    year: 2019,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork2,
     previewImage: artwork2Preview,
     type: 'original',
-    prices: {
-      original: { brl: 11500, usd: 2080 },
-      copy: { brl: 720, usd: 144 },
-    },
+    priceBrl: 11500,
   },
   {
     id: '3',
-    title: 'Ancestrais',
-    year: 2022,
-    dimensions: '120 x 90 cm',
-    technique: 'Técnica mista sobre tela',
-    techniqueEn: 'Mixed media on canvas',
-    description: 'Uma homenagem às raízes africanas da cultura brasileira. As três faces representam passado, presente e futuro, unidos pela tradição oral e pela memória coletiva dos povos que formaram nossa identidade.',
-    descriptionEn: 'A tribute to the African roots of Brazilian culture. The three faces represent past, present, and future, bound by oral tradition and the collective memory of the peoples who shaped our identity.',
+    title: 'O Tempo',
+    year: 2019,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork3,
     previewImage: artwork3Preview,
     type: 'original',
-    prices: {
-      original: { brl: 10500, usd: 2040 },
-      copy: { brl: 1200, usd: 240 },
-    },
+    priceBrl: 10500,
   },
   {
     id: '4',
-    title: 'Rosa dos Ventos Interior',
-    year: 2022,
-    dimensions: '70 x 70 cm',
-    technique: 'Gravura em metal com folha de ouro',
-    techniqueEn: 'Metal engraving with gold leaf',
-    description: 'Esta obra convida o espectador a uma jornada interior. A rosa dos ventos não aponta para o norte geográfico, mas para os caminhos do autoconhecimento, simbolizados pelos elementos naturais que a circundam.',
-    descriptionEn: 'This work invites the viewer on an inward journey. The compass rose does not point to the geographic north, but to the paths of self-knowledge, symbolized by the natural elements surrounding it.',
+    title: 'África',
+    year: 2019,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork4,
     previewImage: artwork4Preview,
     type: 'original',
-    prices: {
-      original: { brl: 10500, usd: 2040 },
-      copy: { brl: 980, usd: 196 },
-    },
+    priceBrl: 10500,
   },
   {
     id: '5',
-    title: 'Dança do Sol',
-    year: 2024,
-    dimensions: '150 x 100 cm',
-    technique: 'Acrílica e pigmentos minerais sobre tela',
-    techniqueEn: 'Acrylic and mineral pigments on canvas',
-    description: 'Celebração do solstício e da energia vital que move todas as coisas. As figuras dançantes representam a humanidade em harmonia com os ciclos cósmicos, guiadas pelo sol que a tudo ilumina e transforma.',
-    descriptionEn: 'A celebration of the solstice and the vital energy that moves all things. The dancing figures portray humanity in harmony with cosmic cycles, guided by the sun that illuminates and transforms everything.',
+    title: 'Os Quatro Elementos',
+    year: 2019,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork5,
     previewImage: artwork5Preview,
     type: 'original',
-    prices: {
-      original: { brl: 11500, usd: 2080 },
-      copy: { brl: 1500, usd: 300 },
-    },
+    priceBrl: 11500,
   },
   {
     id: '6',
-    title: 'Constelação Interior',
-    year: 2024,
-    dimensions: '90 x 90 cm',
-    technique: 'Gravura em cobre com pátina',
-    techniqueEn: 'Copper engraving with patina',
-    description: 'O cosmos como metáfora do inconsciente. Esta obra mapeia as constelações internas que guiam nossa existência, com símbolos que remetem tanto à astronomia quanto à alquimia medieval.',
-    descriptionEn: 'The cosmos as a metaphor for the unconscious. This piece maps the inner constellations that guide our existence, with symbols that evoke both astronomy and medieval alchemy.',
+    title: 'Estandarte Maori',
+    year: 2019,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork6,
     previewImage: artwork6Preview,
     type: 'original',
-    prices: {
-      original: { brl: 10500, usd: 2040 },
-      copy: { brl: 1100, usd: 220 },
-    },
+    priceBrl: 10500,
   },
   {
     id: '7',
-    title: 'Estandarte Imaginário VII',
-    year: 2025,
-    dimensions: '100 x 70 cm',
-    technique: 'Técnica mista sobre papel algodão',
-    techniqueEn: 'Mixed media on cotton paper',
-    description: 'Obra da série Estandartes Imaginários, em que símbolos solares e formas geométricas criam um campo de contemplação e movimento interno.',
-    descriptionEn: 'Work from the Imaginary Banners series, where solar symbols and geometric forms create a field of contemplation and inner movement.',
+    title: 'Transição em vermelho',
+    year: 2020,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork7,
     previewImage: artwork7Preview,
     type: 'original',
-    prices: {
-      original: { brl: 10500, usd: 2040 },
-      copy: { brl: 980, usd: 196 },
-    },
+    priceBrl: 10500,
   },
   {
     id: '8',
-    title: 'Vestígios 3',
-    year: 2024,
-    dimensions: '80 x 80 cm',
-    technique: 'Técnica mista sobre papel',
-    techniqueEn: 'Mixed media on paper',
-    description: 'Uma obra de ressonância contemplativa, em que marcas, traços e vestígios organizam um espaço de memória e presença simbólica.',
-    descriptionEn: 'A contemplative work in which marks, traces, and vestiges organize a space of memory and symbolic presence.',
+    title: 'Depois do Silêncio',
+    year: 2023,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork8,
     previewImage: artwork8Preview,
     type: 'original',
-    prices: {
-      original: { brl: 9800, usd: 1880 },
-      copy: { brl: 900, usd: 180 },
-    },
+    priceBrl: 9800,
   },
   {
     id: '9',
-    title: 'Vestígios Site',
-    year: 2025,
-    dimensions: '110 x 70 cm',
-    technique: 'Técnica mista sobre papel algodão',
-    techniqueEn: 'Mixed media on cotton paper',
-    description: 'Uma composição de presença silenciosa e textura íntima, com formas que sugerem partir, retornar e permanecer como traço vivo do imaginário.',
-    descriptionEn: 'A composition of silent presence and intimate texture, with forms suggesting departure, return, and permanence as living traces of imagination.',
+    title: 'Herança',
+    year: 2023,
+    dimensions: '150 x 150 cm',
+    technique: 'Acrílica sobre tela',
+    techniqueEn: 'Acrylic on canvas',
     image: artwork9,
     previewImage: artwork9Preview,
     type: 'original',
-    prices: {
-      original: { brl: 10500, usd: 2040 },
-      copy: { brl: 980, usd: 196 },
-    },
+    priceBrl: 10500,
   },
 ];
 
-export const formatPrice = (value: number, currency: 'brl' | 'usd'): string => {
+/**
+ * Formata um valor em reais na moeda escolhida.
+ * Em dólar, converte pela cotação USD -> BRL recebida (ver `useUsdRate`).
+ */
+export const formatPrice = (
+  brlValue: number,
+  currency: 'brl' | 'usd',
+  usdBrlRate: number
+): string => {
   if (currency === 'brl') {
-    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return brlValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
-  return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  return (brlValue / usdBrlRate).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 };

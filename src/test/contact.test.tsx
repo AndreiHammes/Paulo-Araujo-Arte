@@ -59,8 +59,38 @@ describe('Contact', () => {
     expect(await screen.findByText('Mensagem enviada')).toBeInTheDocument();
   });
 
+  // O FormSubmit responde 200 mesmo quando recusa o envio (ex.: formulário não ativado).
+  it('treats a 200 with success:"false" as a failure', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => ({
+          success: 'false',
+          message: "This form needs Activation. We've sent you an email...",
+        }),
+      }),
+    );
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    renderPage();
+
+    fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: 'Maria' } });
+    fireEvent.change(screen.getByLabelText(/^Email$/i), {
+      target: { value: 'maria@exemplo.com' },
+    });
+    fireEvent.change(screen.getByLabelText(/Assunto/i), { target: { value: 'other' } });
+    fireEvent.change(screen.getByLabelText(/Mensagem/i), { target: { value: 'Olá' } });
+    fireEvent.click(screen.getByRole('button', { name: /Enviar Mensagem/i }));
+
+    expect(await screen.findByText('Não foi possível enviar')).toBeInTheDocument();
+    expect(consoleError.mock.calls[0][0]).toContain('needs Activation');
+  });
+
   it('shows the fallback channels when sending fails', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+    vi.spyOn(console, 'error').mockImplementation(() => {});
 
     renderPage();
 

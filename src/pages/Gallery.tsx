@@ -10,6 +10,8 @@ import abstratoImage from '@/assets/abstrato.jpg?w=1600&format=webp&quality=78';
 import abstratoPreview from '@/assets/abstrato.jpg?w=700&format=webp&quality=70';
 import gravura02Image from '@/assets/gravura02.jpg?w=1600&format=webp&quality=78';
 import gravura02Preview from '@/assets/gravura02.jpg?w=700&format=webp&quality=70';
+import quetzalImage from '@/assets/Quetzal (1).jpg?w=1600&format=webp&quality=78';
+import quetzalPreview from '@/assets/Quetzal (1).jpg?w=700&format=webp&quality=70';
 
 type FilterType = 'original' | 'drawing' | 'zen' | 'photography' | 'abstract';
 
@@ -119,6 +121,14 @@ const photographySeries: DrawingItem[] = Object.entries(photoFullImports)
   .sort((a, b) => a.number - b.number);
 
 const abstractSeries: DrawingItem[] = [
+  {
+    id: 'abstract-quetzal',
+    title: 'Quetzal',
+    image: quetzalImage,
+    previewImage: quetzalPreview,
+    number: 0,
+    kind: 'abstract',
+  },
   {
     id: 'abstract-1',
     title: 'Alegoria Lilás',
