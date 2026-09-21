@@ -53,7 +53,7 @@ export const artworks: Artwork[] = [
     image: esplendorImage,
     previewImage: esplendorPreview,
     type: 'original',
-    priceBrl: 10500,
+    priceBrl: 11500,
   },
   {
     id: '1',
